@@ -30,9 +30,10 @@ Partial Class login
         Label2 = New Label()
         Label3 = New Label()
         BtnAcceso = New Button()
-        Label4 = New Label()
         Label5 = New Label()
         BtnRegister = New Button()
+        Conexion = New Button()
+        lblTest = New Label()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
@@ -79,9 +80,9 @@ Partial Class login
         Label2.AutoSize = True
         Label2.Location = New Point(189, 86)
         Label2.Name = "Label2"
-        Label2.Size = New Size(43, 15)
+        Label2.Size = New Size(60, 15)
         Label2.TabIndex = 3
-        Label2.Text = "Correo"
+        Label2.Text = "Username"
         ' 
         ' Label3
         ' 
@@ -102,17 +103,6 @@ Partial Class login
         BtnAcceso.TabIndex = 4
         BtnAcceso.Text = "Acceder"
         BtnAcceso.UseVisualStyleBackColor = False
-        ' 
-        ' Label4
-        ' 
-        Label4.AutoSize = True
-        Label4.Font = New Font("Segoe UI", 9F, FontStyle.Underline)
-        Label4.ForeColor = Color.FromArgb(CByte(0), CByte(0), CByte(64))
-        Label4.Location = New Point(29, 218)
-        Label4.Name = "Label4"
-        Label4.Size = New Size(141, 15)
-        Label4.TabIndex = 5
-        Label4.Text = "¿Olvidaste tu contraseña?"
         ' 
         ' Label5
         ' 
@@ -135,14 +125,33 @@ Partial Class login
         BtnRegister.Text = "Registrarme"
         BtnRegister.UseVisualStyleBackColor = False
         ' 
+        ' Conexion
+        ' 
+        Conexion.Location = New Point(32, 212)
+        Conexion.Name = "Conexion"
+        Conexion.Size = New Size(131, 23)
+        Conexion.TabIndex = 6
+        Conexion.Text = "testConexion"
+        Conexion.UseVisualStyleBackColor = True
+        ' 
+        ' lblTest
+        ' 
+        lblTest.AutoSize = True
+        lblTest.Location = New Point(34, 244)
+        lblTest.Name = "lblTest"
+        lblTest.Size = New Size(27, 15)
+        lblTest.TabIndex = 7
+        lblTest.Text = "Test"
+        ' 
         ' login
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.White
         ClientSize = New Size(416, 306)
+        Controls.Add(lblTest)
+        Controls.Add(Conexion)
         Controls.Add(Label5)
-        Controls.Add(Label4)
         Controls.Add(BtnRegister)
         Controls.Add(BtnAcceso)
         Controls.Add(Label3)
@@ -165,7 +174,8 @@ Partial Class login
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents BtnAcceso As Button
-    Friend WithEvents Label4 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents BtnRegister As Button
+    Friend WithEvents Conexion As Button
+    Friend WithEvents lblTest As Label
 End Class

@@ -26,15 +26,11 @@ Partial Class Registro
         Label1 = New Label()
         Label2 = New Label()
         Label3 = New Label()
-        Label6 = New Label()
-        Label7 = New Label()
         Label8 = New Label()
-        TxtName = New TextBox()
-        TxtSurname = New TextBox()
-        TxtPhone = New TextBox()
-        TxtEmail = New TextBox()
+        TxtUser = New TextBox()
         TxtPassword = New TextBox()
         BtnRegister = New Button()
+        ComboBox1 = New ComboBox()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
@@ -51,49 +47,31 @@ Partial Class Registro
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.Font = New Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label1.Font = New Font("Segoe UI Semibold", 22F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label1.ForeColor = Color.Navy
-        Label1.Location = New Point(239, 9)
+        Label1.Location = New Point(255, 60)
         Label1.Name = "Label1"
-        Label1.Size = New Size(103, 32)
+        Label1.Size = New Size(131, 41)
         Label1.TabIndex = 1
         Label1.Text = "Registro"
         ' 
         ' Label2
         ' 
         Label2.AutoSize = True
-        Label2.Location = New Point(179, 61)
+        Label2.Location = New Point(179, 138)
         Label2.Name = "Label2"
-        Label2.Size = New Size(54, 15)
+        Label2.Size = New Size(50, 15)
         Label2.TabIndex = 1
-        Label2.Text = "Nombre:"
+        Label2.Text = "Usuario:"
         ' 
         ' Label3
         ' 
         Label3.AutoSize = True
-        Label3.Location = New Point(178, 108)
+        Label3.Location = New Point(178, 185)
         Label3.Name = "Label3"
-        Label3.Size = New Size(54, 15)
+        Label3.Size = New Size(27, 15)
         Label3.TabIndex = 1
-        Label3.Text = "Apellido:"
-        ' 
-        ' Label6
-        ' 
-        Label6.AutoSize = True
-        Label6.Location = New Point(179, 147)
-        Label6.Name = "Label6"
-        Label6.Size = New Size(55, 15)
-        Label6.TabIndex = 1
-        Label6.Text = "Teléfono:"
-        ' 
-        ' Label7
-        ' 
-        Label7.AutoSize = True
-        Label7.Location = New Point(178, 185)
-        Label7.Name = "Label7"
-        Label7.Size = New Size(46, 15)
-        Label7.TabIndex = 1
-        Label7.Text = "Correo:"
+        Label3.Text = "Rol:"
         ' 
         ' Label8
         ' 
@@ -104,33 +82,12 @@ Partial Class Registro
         Label8.TabIndex = 1
         Label8.Text = "Contraseña:"
         ' 
-        ' TxtName
+        ' TxtUser
         ' 
-        TxtName.Location = New Point(179, 73)
-        TxtName.Name = "TxtName"
-        TxtName.Size = New Size(207, 23)
-        TxtName.TabIndex = 2
-        ' 
-        ' TxtSurname
-        ' 
-        TxtSurname.Location = New Point(179, 117)
-        TxtSurname.Name = "TxtSurname"
-        TxtSurname.Size = New Size(207, 23)
-        TxtSurname.TabIndex = 2
-        ' 
-        ' TxtPhone
-        ' 
-        TxtPhone.Location = New Point(178, 156)
-        TxtPhone.Name = "TxtPhone"
-        TxtPhone.Size = New Size(102, 23)
-        TxtPhone.TabIndex = 2
-        ' 
-        ' TxtEmail
-        ' 
-        TxtEmail.Location = New Point(179, 193)
-        TxtEmail.Name = "TxtEmail"
-        TxtEmail.Size = New Size(207, 23)
-        TxtEmail.TabIndex = 2
+        TxtUser.Location = New Point(179, 150)
+        TxtUser.Name = "TxtUser"
+        TxtUser.Size = New Size(207, 23)
+        TxtUser.TabIndex = 2
         ' 
         ' TxtPassword
         ' 
@@ -151,6 +108,14 @@ Partial Class Registro
         BtnRegister.Text = "Registrarme"
         BtnRegister.UseVisualStyleBackColor = False
         ' 
+        ' ComboBox1
+        ' 
+        ComboBox1.FormattingEnabled = True
+        ComboBox1.Location = New Point(178, 194)
+        ComboBox1.Name = "ComboBox1"
+        ComboBox1.Size = New Size(208, 23)
+        ComboBox1.TabIndex = 4
+        ' 
         ' Registro
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
@@ -158,18 +123,14 @@ Partial Class Registro
         BackColor = Color.White
         ClientSize = New Size(417, 335)
         Controls.Add(Label8)
-        Controls.Add(Label7)
-        Controls.Add(Label6)
         Controls.Add(Label2)
         Controls.Add(Label3)
         Controls.Add(BtnRegister)
         Controls.Add(TxtPassword)
-        Controls.Add(TxtEmail)
-        Controls.Add(TxtPhone)
-        Controls.Add(TxtSurname)
-        Controls.Add(TxtName)
+        Controls.Add(TxtUser)
         Controls.Add(Label1)
         Controls.Add(PictureBox1)
+        Controls.Add(ComboBox1)
         Name = "Registro"
         Text = "Registro"
         CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
@@ -181,13 +142,9 @@ Partial Class Registro
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
-    Friend WithEvents Label6 As Label
-    Friend WithEvents Label7 As Label
     Friend WithEvents Label8 As Label
-    Friend WithEvents TxtName As TextBox
-    Friend WithEvents TxtSurname As TextBox
-    Friend WithEvents TxtPhone As TextBox
-    Friend WithEvents TxtEmail As TextBox
+    Friend WithEvents TxtUser As TextBox
     Friend WithEvents TxtPassword As TextBox
     Friend WithEvents BtnRegister As Button
+    Friend WithEvents ComboBox1 As ComboBox
 End Class
