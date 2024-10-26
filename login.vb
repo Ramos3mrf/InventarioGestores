@@ -16,7 +16,7 @@ Public Class login
             Dim result As Integer = Convert.ToInt32(command.ExecuteScalar())
 
             If result > 0 Then
-                MessageBox.Show("Login exitoso")
+                MessageBox.Show("BIENVENIDO")
                 Dim FormMenu As New MenuPrincipal()
                 FormMenu.Show()
                 Me.Hide()
@@ -32,39 +32,22 @@ Public Class login
     End Sub
 
     Private Sub BtnRegister_Click(sender As Object, e As EventArgs) Handles BtnRegister.Click
-        ' Crear una instancia del formulario de registro
         Dim registroForm As New Registro()
-
-        ' Mostrar el formulario de registro
-        registroForm.Show() ' Muestra el formulario de registro
-
-        ' Opcional: Ocultar el formulario de login
-        Me.Hide() ' Oculta el formulario de login
+        registroForm.Show()
+        Me.Hide()
     End Sub
 
     Private Sub Conexion_Click(sender As Object, e As EventArgs) Handles Conexion.Click
         Try
-            'Dim server = "localhost"
-            'Dim usuario = "root"
-            'Dim pass = "1234"
-            'Dim db = "inventario"
             Dim conexion = "server=localhost;Uid=root;pwd=1234;database=inventario;SslMode=none"
-            'Dim cadena = "server=" & server & ";Uid=" & usuario & ";pwd=" & pass & ";database=" & db
             Dim ConexionBD = New MySqlConnection(conexion)
             ConexionBD.Open()
             lblTest.Text = "Conexión establecida"
-            'Dim ConexionDB As New MySqlConnection()
-            'ConexionDB.ConnectionString = "server=localhost;uid=admin;password=1234;database=inventario;SslMode=none;"
-
-            'ConexionDB.Open()
-            'MessageBox.Show("Se ha establecido la conexión a la base de datos")
-            ''ConexionDB.Close()
-            ''MessageBox.Show("Desconectado")
         Catch ex As MySqlException
             lblTest.Text = "Error en la conexión " & ex.ToString
 
         Finally
-
+            dbConnection.CloseConnection()
         End Try
     End Sub
 

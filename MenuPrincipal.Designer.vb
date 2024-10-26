@@ -50,24 +50,28 @@ Partial Class MenuPrincipal
         ' tsmCatalogos
         ' 
         tsmCatalogos.DropDownItems.AddRange(New ToolStripItem() {tsmCatProd, tsmCatCli, tsmCatPro})
+        tsmCatalogos.ForeColor = Color.Navy
         tsmCatalogos.Name = "tsmCatalogos"
         tsmCatalogos.Size = New Size(72, 20)
         tsmCatalogos.Text = "Catálogos"
         ' 
         ' tsmCatProd
         ' 
+        tsmCatProd.ForeColor = Color.Navy
         tsmCatProd.Name = "tsmCatProd"
         tsmCatProd.Size = New Size(206, 22)
         tsmCatProd.Text = "Catálogo de productos"
         ' 
         ' tsmCatCli
         ' 
+        tsmCatCli.ForeColor = Color.Navy
         tsmCatCli.Name = "tsmCatCli"
         tsmCatCli.Size = New Size(206, 22)
         tsmCatCli.Text = "Catálogo de clientes"
         ' 
         ' tsmCatPro
         ' 
+        tsmCatPro.ForeColor = Color.Navy
         tsmCatPro.Name = "tsmCatPro"
         tsmCatPro.Size = New Size(206, 22)
         tsmCatPro.Text = "Catálogo de proveedores"
@@ -75,42 +79,50 @@ Partial Class MenuPrincipal
         ' tsmReportes
         ' 
         tsmReportes.DropDownItems.AddRange(New ToolStripItem() {tsmRepComRangoF, tsmRepVenRangoF, tsmRepGan, tsmRepExis})
+        tsmReportes.ForeColor = Color.Navy
         tsmReportes.Name = "tsmReportes"
         tsmReportes.Size = New Size(65, 20)
         tsmReportes.Text = "Reportes"
         ' 
         ' tsmRepComRangoF
         ' 
+        tsmRepComRangoF.ForeColor = Color.Navy
         tsmRepComRangoF.Name = "tsmRepComRangoF"
         tsmRepComRangoF.Size = New Size(283, 22)
         tsmRepComRangoF.Text = "Reporte de compras por rango de fecha"
         ' 
         ' tsmRepVenRangoF
         ' 
+        tsmRepVenRangoF.ForeColor = Color.Navy
         tsmRepVenRangoF.Name = "tsmRepVenRangoF"
         tsmRepVenRangoF.Size = New Size(283, 22)
         tsmRepVenRangoF.Text = "Reporte de ventas por rango de fecha"
         ' 
         ' tsmRepGan
         ' 
+        tsmRepGan.ForeColor = Color.Navy
         tsmRepGan.Name = "tsmRepGan"
         tsmRepGan.Size = New Size(283, 22)
         tsmRepGan.Text = "Reporte de ganancias"
         ' 
         ' tsmRepExis
         ' 
+        tsmRepExis.ForeColor = Color.Navy
         tsmRepExis.Name = "tsmRepExis"
         tsmRepExis.Size = New Size(283, 22)
         tsmRepExis.Text = "Reporte de existencias"
         ' 
         ' tsmExistenciasMin
         ' 
+        tsmExistenciasMin.ForeColor = Color.Navy
         tsmExistenciasMin.Name = "tsmExistenciasMin"
         tsmExistenciasMin.Size = New Size(133, 20)
         tsmExistenciasMin.Text = "Existencias al mínimo"
         ' 
         ' CerrarSesiónToolStripMenuItem
         ' 
+        CerrarSesiónToolStripMenuItem.BackColor = Color.MistyRose
+        CerrarSesiónToolStripMenuItem.ForeColor = Color.Navy
         CerrarSesiónToolStripMenuItem.Name = "CerrarSesiónToolStripMenuItem"
         CerrarSesiónToolStripMenuItem.Size = New Size(87, 20)
         CerrarSesiónToolStripMenuItem.Text = "Cerrar sesión"
@@ -119,11 +131,16 @@ Partial Class MenuPrincipal
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
+        AutoSize = True
         ClientSize = New Size(415, 393)
+        ControlBox = False
         Controls.Add(MenuStrip1)
+        ForeColor = Color.Navy
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         IsMdiContainer = True
         MainMenuStrip = MenuStrip1
+        MaximizeBox = False
+        MinimizeBox = False
         Name = "MenuPrincipal"
         StartPosition = FormStartPosition.CenterScreen
         Text = "Menú Principal"

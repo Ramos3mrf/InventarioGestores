@@ -23,4 +23,8 @@ Public Class MenuPrincipal
         Me.Hide()
     End Sub
 
+    Private Sub tsmCatPro_Click(sender As Object, e As EventArgs) Handles tsmCatPro.Click
+        Dim proveedoresFormulario As New Proveedores() ' Crear una nueva instancia del formulario hijo
+        proveedoresFormulario.Show()
+    End Sub
 End Class

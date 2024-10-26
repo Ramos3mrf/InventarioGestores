@@ -64,7 +64,7 @@ Partial Class login
         TxtUser.Location = New Point(189, 104)
         TxtUser.Name = "TxtUser"
         TxtUser.Size = New Size(196, 23)
-        TxtUser.TabIndex = 2
+        TxtUser.TabIndex = 1
         ' 
         ' TxtPassword
         ' 
@@ -100,7 +100,7 @@ Partial Class login
         BtnAcceso.Location = New Point(287, 206)
         BtnAcceso.Name = "BtnAcceso"
         BtnAcceso.Size = New Size(98, 35)
-        BtnAcceso.TabIndex = 4
+        BtnAcceso.TabIndex = 3
         BtnAcceso.Text = "Acceder"
         BtnAcceso.UseVisualStyleBackColor = False
         ' 
@@ -145,6 +145,7 @@ Partial Class login
         ' 
         ' login
         ' 
+        AcceptButton = BtnAcceso
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.White
