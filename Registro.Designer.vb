@@ -30,14 +30,15 @@ Partial Class Registro
         TxtUser = New TextBox()
         TxtPassword = New TextBox()
         BtnRegister = New Button()
-        ComboBox1 = New ComboBox()
+        cmbRoles = New ComboBox()
+        gotoLogin = New Button()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' PictureBox1
         ' 
         PictureBox1.Image = My.Resources.Resources.NewUserWeb
-        PictureBox1.Location = New Point(25, 60)
+        PictureBox1.Location = New Point(25, 77)
         PictureBox1.Name = "PictureBox1"
         PictureBox1.Size = New Size(147, 202)
         PictureBox1.SizeMode = PictureBoxSizeMode.Zoom
@@ -58,7 +59,7 @@ Partial Class Registro
         ' Label2
         ' 
         Label2.AutoSize = True
-        Label2.Location = New Point(179, 138)
+        Label2.Location = New Point(179, 115)
         Label2.Name = "Label2"
         Label2.Size = New Size(50, 15)
         Label2.TabIndex = 1
@@ -67,7 +68,7 @@ Partial Class Registro
         ' Label3
         ' 
         Label3.AutoSize = True
-        Label3.Location = New Point(178, 185)
+        Label3.Location = New Point(178, 162)
         Label3.Name = "Label3"
         Label3.Size = New Size(27, 15)
         Label3.TabIndex = 1
@@ -76,7 +77,7 @@ Partial Class Registro
         ' Label8
         ' 
         Label8.AutoSize = True
-        Label8.Location = New Point(179, 230)
+        Label8.Location = New Point(179, 207)
         Label8.Name = "Label8"
         Label8.Size = New Size(70, 15)
         Label8.TabIndex = 1
@@ -84,14 +85,14 @@ Partial Class Registro
         ' 
         ' TxtUser
         ' 
-        TxtUser.Location = New Point(179, 150)
+        TxtUser.Location = New Point(179, 127)
         TxtUser.Name = "TxtUser"
         TxtUser.Size = New Size(207, 23)
         TxtUser.TabIndex = 2
         ' 
         ' TxtPassword
         ' 
-        TxtPassword.Location = New Point(179, 239)
+        TxtPassword.Location = New Point(179, 216)
         TxtPassword.Name = "TxtPassword"
         TxtPassword.Size = New Size(207, 23)
         TxtPassword.TabIndex = 2
@@ -101,20 +102,35 @@ Partial Class Registro
         BtnRegister.BackColor = Color.Navy
         BtnRegister.FlatStyle = FlatStyle.Popup
         BtnRegister.ForeColor = SystemColors.ControlLightLight
-        BtnRegister.Location = New Point(239, 285)
+        BtnRegister.Location = New Point(239, 262)
         BtnRegister.Name = "BtnRegister"
         BtnRegister.Size = New Size(147, 31)
         BtnRegister.TabIndex = 3
         BtnRegister.Text = "Registrarme"
         BtnRegister.UseVisualStyleBackColor = False
         ' 
-        ' ComboBox1
+        ' cmbRoles
         ' 
-        ComboBox1.FormattingEnabled = True
-        ComboBox1.Location = New Point(178, 194)
-        ComboBox1.Name = "ComboBox1"
-        ComboBox1.Size = New Size(208, 23)
-        ComboBox1.TabIndex = 4
+        cmbRoles.ForeColor = Color.Black
+        cmbRoles.FormattingEnabled = True
+        cmbRoles.Items.AddRange(New Object() {"administrador", "vendedor"})
+        cmbRoles.Location = New Point(178, 171)
+        cmbRoles.Name = "cmbRoles"
+        cmbRoles.Size = New Size(208, 23)
+        cmbRoles.TabIndex = 4
+        ' 
+        ' gotoLogin
+        ' 
+        gotoLogin.BackColor = Color.Transparent
+        gotoLogin.FlatStyle = FlatStyle.Flat
+        gotoLogin.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        gotoLogin.ForeColor = Color.Navy
+        gotoLogin.Location = New Point(25, 285)
+        gotoLogin.Name = "gotoLogin"
+        gotoLogin.Size = New Size(75, 33)
+        gotoLogin.TabIndex = 5
+        gotoLogin.Text = "Login"
+        gotoLogin.UseVisualStyleBackColor = False
         ' 
         ' Registro
         ' 
@@ -122,6 +138,7 @@ Partial Class Registro
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.White
         ClientSize = New Size(417, 335)
+        Controls.Add(gotoLogin)
         Controls.Add(Label8)
         Controls.Add(Label2)
         Controls.Add(Label3)
@@ -130,7 +147,7 @@ Partial Class Registro
         Controls.Add(TxtUser)
         Controls.Add(Label1)
         Controls.Add(PictureBox1)
-        Controls.Add(ComboBox1)
+        Controls.Add(cmbRoles)
         Name = "Registro"
         Text = "Registro"
         CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
@@ -146,5 +163,6 @@ Partial Class Registro
     Friend WithEvents TxtUser As TextBox
     Friend WithEvents TxtPassword As TextBox
     Friend WithEvents BtnRegister As Button
-    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents cmbRoles As ComboBox
+    Friend WithEvents gotoLogin As Button
 End Class

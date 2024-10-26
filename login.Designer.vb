@@ -137,7 +137,7 @@ Partial Class login
         ' lblTest
         ' 
         lblTest.AutoSize = True
-        lblTest.Location = New Point(34, 244)
+        lblTest.Location = New Point(32, 238)
         lblTest.Name = "lblTest"
         lblTest.Size = New Size(27, 15)
         lblTest.TabIndex = 7

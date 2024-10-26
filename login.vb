@@ -17,7 +17,7 @@ Public Class login
 
             If result > 0 Then
                 MessageBox.Show("Login exitoso")
-                Dim FormMenu As New Form1()
+                Dim FormMenu As New MenuPrincipal()
                 FormMenu.Show()
                 Me.Hide()
             Else
