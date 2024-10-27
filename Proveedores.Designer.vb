@@ -191,6 +191,7 @@ Partial Class Proveedores
         dgvProveedores.GridColor = Color.FromArgb(CByte(224), CByte(224), CByte(224))
         dgvProveedores.Location = New Point(41, 28)
         dgvProveedores.Name = "dgvProveedores"
+        dgvProveedores.ReadOnly = True
         dgvProveedores.Size = New Size(581, 184)
         dgvProveedores.TabIndex = 11
         ' 

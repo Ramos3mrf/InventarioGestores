@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class Reportes
+Partial Class Usuarios
     Inherits System.Windows.Forms.Form
 
     'Form reemplaza a Dispose para limpiar la lista de componentes.
@@ -23,80 +23,223 @@ Partial Class Reportes
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         components = New ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Reportes))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Usuarios))
         ConexionBasedeDatosBindingSource = New BindingSource(components)
-        btnBuscarUsuario = New Button()
+        dgvUsuarios = New DataGridView()
+        txtRol = New TextBox()
+        txtContrasena = New TextBox()
+        txtNombre = New TextBox()
+        txtUsuarioID = New TextBox()
+        Label4 = New Label()
+        Label3 = New Label()
         Label1 = New Label()
-        TextBox1 = New TextBox()
-        DataGridView1 = New DataGridView()
+        GroupBox1 = New GroupBox()
+        btnSalir = New Button()
+        btnNuevo = New Button()
+        btnGuardar = New Button()
+        btnBorrar = New Button()
+        GroupBox2 = New GroupBox()
         CType(ConexionBasedeDatosBindingSource, ComponentModel.ISupportInitialize).BeginInit()
-        CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
+        CType(dgvUsuarios, ComponentModel.ISupportInitialize).BeginInit()
+        GroupBox1.SuspendLayout()
+        GroupBox2.SuspendLayout()
         SuspendLayout()
         ' 
         ' ConexionBasedeDatosBindingSource
         ' 
         ConexionBasedeDatosBindingSource.DataSource = GetType(ConexionBasedeDatos)
         ' 
-        ' btnBuscarUsuario
+        ' dgvUsuarios
         ' 
-        btnBuscarUsuario.BackColor = Color.White
-        btnBuscarUsuario.FlatStyle = FlatStyle.Flat
-        btnBuscarUsuario.ForeColor = Color.Navy
-        btnBuscarUsuario.Location = New Point(436, 30)
-        btnBuscarUsuario.Name = "btnBuscarUsuario"
-        btnBuscarUsuario.Size = New Size(75, 24)
-        btnBuscarUsuario.TabIndex = 1
-        btnBuscarUsuario.Text = "Buscar"
-        btnBuscarUsuario.UseVisualStyleBackColor = False
+        dgvUsuarios.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        dgvUsuarios.Location = New Point(12, 12)
+        dgvUsuarios.Name = "dgvUsuarios"
+        dgvUsuarios.ReadOnly = True
+        dgvUsuarios.Size = New Size(455, 243)
+        dgvUsuarios.TabIndex = 4
+        ' 
+        ' txtRol
+        ' 
+        txtRol.BackColor = Color.FromArgb(CByte(224), CByte(224), CByte(224))
+        txtRol.BorderStyle = BorderStyle.None
+        txtRol.ForeColor = Color.Navy
+        txtRol.Location = New Point(116, 56)
+        txtRol.Name = "txtRol"
+        txtRol.Size = New Size(138, 16)
+        txtRol.TabIndex = 20
+        ' 
+        ' txtContrasena
+        ' 
+        txtContrasena.BackColor = Color.FromArgb(CByte(224), CByte(224), CByte(224))
+        txtContrasena.BorderStyle = BorderStyle.None
+        txtContrasena.ForeColor = Color.Navy
+        txtContrasena.Location = New Point(116, 133)
+        txtContrasena.Name = "txtContrasena"
+        txtContrasena.Size = New Size(176, 16)
+        txtContrasena.TabIndex = 18
+        ' 
+        ' txtNombre
+        ' 
+        txtNombre.BackColor = Color.FromArgb(CByte(224), CByte(224), CByte(224))
+        txtNombre.BorderStyle = BorderStyle.None
+        txtNombre.ForeColor = Color.Navy
+        txtNombre.Location = New Point(116, 94)
+        txtNombre.Name = "txtNombre"
+        txtNombre.Size = New Size(187, 16)
+        txtNombre.TabIndex = 14
+        ' 
+        ' txtUsuarioID
+        ' 
+        txtUsuarioID.BorderStyle = BorderStyle.None
+        txtUsuarioID.Location = New Point(116, 22)
+        txtUsuarioID.Name = "txtUsuarioID"
+        txtUsuarioID.ReadOnly = True
+        txtUsuarioID.Size = New Size(86, 16)
+        txtUsuarioID.TabIndex = 22
+        ' 
+        ' Label4
+        ' 
+        Label4.AutoSize = True
+        Label4.Font = New Font("Segoe UI", 11.25F)
+        Label4.ForeColor = Color.Navy
+        Label4.Location = New Point(80, 52)
+        Label4.Name = "Label4"
+        Label4.Size = New Size(34, 20)
+        Label4.TabIndex = 19
+        Label4.Text = "Rol:"
+        Label4.TextAlign = ContentAlignment.MiddleLeft
+        ' 
+        ' Label3
+        ' 
+        Label3.AutoSize = True
+        Label3.Font = New Font("Segoe UI", 11.25F)
+        Label3.ForeColor = Color.Navy
+        Label3.Location = New Point(28, 131)
+        Label3.Name = "Label3"
+        Label3.Size = New Size(86, 20)
+        Label3.TabIndex = 17
+        Label3.Text = "Contraseña:"
+        Label3.TextAlign = ContentAlignment.MiddleLeft
         ' 
         ' Label1
         ' 
         Label1.AutoSize = True
+        Label1.Font = New Font("Segoe UI", 11.25F)
         Label1.ForeColor = Color.Navy
-        Label1.Location = New Point(148, 35)
+        Label1.Location = New Point(47, 90)
         Label1.Name = "Label1"
-        Label1.Size = New Size(60, 15)
-        Label1.TabIndex = 2
-        Label1.Text = "Username"
+        Label1.Size = New Size(67, 20)
+        Label1.TabIndex = 13
+        Label1.Text = "Nombre:"
+        Label1.TextAlign = ContentAlignment.MiddleLeft
         ' 
-        ' TextBox1
+        ' GroupBox1
         ' 
-        TextBox1.BackColor = Color.FromArgb(CByte(224), CByte(224), CByte(224))
-        TextBox1.BorderStyle = BorderStyle.None
-        TextBox1.ForeColor = Color.Navy
-        TextBox1.Location = New Point(210, 35)
-        TextBox1.Name = "TextBox1"
-        TextBox1.Size = New Size(221, 16)
-        TextBox1.TabIndex = 3
+        GroupBox1.Controls.Add(btnSalir)
+        GroupBox1.Controls.Add(btnNuevo)
+        GroupBox1.Controls.Add(btnGuardar)
+        GroupBox1.Controls.Add(btnBorrar)
+        GroupBox1.ForeColor = Color.Navy
+        GroupBox1.Location = New Point(524, 12)
+        GroupBox1.Name = "GroupBox1"
+        GroupBox1.Size = New Size(106, 206)
+        GroupBox1.TabIndex = 21
+        GroupBox1.TabStop = False
+        GroupBox1.Text = "Acciones"
         ' 
-        ' DataGridView1
+        ' btnSalir
         ' 
-        DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridView1.Location = New Point(12, 83)
-        DataGridView1.Name = "DataGridView1"
-        DataGridView1.Size = New Size(639, 355)
-        DataGridView1.TabIndex = 4
+        btnSalir.FlatStyle = FlatStyle.Flat
+        btnSalir.ForeColor = Color.Maroon
+        btnSalir.Location = New Point(16, 147)
+        btnSalir.Name = "btnSalir"
+        btnSalir.Size = New Size(75, 23)
+        btnSalir.TabIndex = 8
+        btnSalir.Text = "Salir"
+        btnSalir.UseVisualStyleBackColor = True
         ' 
-        ' Reportes
+        ' btnNuevo
+        ' 
+        btnNuevo.FlatStyle = FlatStyle.Flat
+        btnNuevo.ForeColor = Color.Navy
+        btnNuevo.Location = New Point(16, 43)
+        btnNuevo.Name = "btnNuevo"
+        btnNuevo.Size = New Size(75, 23)
+        btnNuevo.TabIndex = 5
+        btnNuevo.Text = "Nuevo"
+        btnNuevo.UseVisualStyleBackColor = True
+        ' 
+        ' btnGuardar
+        ' 
+        btnGuardar.FlatStyle = FlatStyle.Flat
+        btnGuardar.ForeColor = Color.Green
+        btnGuardar.Location = New Point(16, 78)
+        btnGuardar.Name = "btnGuardar"
+        btnGuardar.Size = New Size(75, 23)
+        btnGuardar.TabIndex = 6
+        btnGuardar.Text = "Guardar"
+        btnGuardar.UseVisualStyleBackColor = True
+        ' 
+        ' btnBorrar
+        ' 
+        btnBorrar.FlatStyle = FlatStyle.Flat
+        btnBorrar.ForeColor = Color.Red
+        btnBorrar.Location = New Point(16, 112)
+        btnBorrar.Name = "btnBorrar"
+        btnBorrar.Size = New Size(75, 23)
+        btnBorrar.TabIndex = 7
+        btnBorrar.Text = "Borrar"
+        btnBorrar.UseVisualStyleBackColor = True
+        ' 
+        ' GroupBox2
+        ' 
+        GroupBox2.Controls.Add(txtUsuarioID)
+        GroupBox2.Controls.Add(txtRol)
+        GroupBox2.Controls.Add(txtContrasena)
+        GroupBox2.Controls.Add(Label4)
+        GroupBox2.Controls.Add(Label1)
+        GroupBox2.Controls.Add(txtNombre)
+        GroupBox2.Controls.Add(Label3)
+        GroupBox2.ForeColor = Color.Navy
+        GroupBox2.Location = New Point(12, 266)
+        GroupBox2.Name = "GroupBox2"
+        GroupBox2.Size = New Size(618, 172)
+        GroupBox2.TabIndex = 23
+        GroupBox2.TabStop = False
+        GroupBox2.Text = "Datos del Usuario"
+        ' 
+        ' Usuarios
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(663, 450)
-        Controls.Add(DataGridView1)
-        Controls.Add(TextBox1)
-        Controls.Add(Label1)
-        Controls.Add(btnBuscarUsuario)
+        Controls.Add(GroupBox1)
+        Controls.Add(GroupBox2)
+        Controls.Add(dgvUsuarios)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
-        Name = "Reportes"
+        Name = "Usuarios"
+        StartPosition = FormStartPosition.CenterParent
         Text = "Usuarios"
         CType(ConexionBasedeDatosBindingSource, ComponentModel.ISupportInitialize).EndInit()
-        CType(DataGridView1, ComponentModel.ISupportInitialize).EndInit()
+        CType(dgvUsuarios, ComponentModel.ISupportInitialize).EndInit()
+        GroupBox1.ResumeLayout(False)
+        GroupBox2.ResumeLayout(False)
+        GroupBox2.PerformLayout()
         ResumeLayout(False)
-        PerformLayout()
     End Sub
     Friend WithEvents ConexionBasedeDatosBindingSource As BindingSource
-    Friend WithEvents btnBuscarUsuario As Button
+    Friend WithEvents dgvUsuarios As DataGridView
+    Friend WithEvents txtRol As TextBox
+    Friend WithEvents txtContrasena As TextBox
+    Friend WithEvents txtNombre As TextBox
+    Friend WithEvents txtUsuarioID As TextBox
+    Friend WithEvents Label4 As Label
+    Friend WithEvents Label3 As Label
     Friend WithEvents Label1 As Label
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents btnSalir As Button
+    Friend WithEvents btnNuevo As Button
+    Friend WithEvents btnGuardar As Button
+    Friend WithEvents btnBorrar As Button
+    Friend WithEvents GroupBox2 As GroupBox
 End Class

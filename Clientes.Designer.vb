@@ -23,12 +23,12 @@ Partial Class Clientes
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Clientes))
-        DataGridView1 = New DataGridView()
+        dgvClientes = New DataGridView()
         txtCorreo = New TextBox()
         txtTelefono = New TextBox()
         txtDireccion = New TextBox()
         txtNombre = New TextBox()
-        txtProveedorID = New TextBox()
+        txtClienteID = New TextBox()
         Label4 = New Label()
         Label3 = New Label()
         Label2 = New Label()
@@ -38,18 +38,18 @@ Partial Class Clientes
         btnNuevo = New Button()
         btnGuardar = New Button()
         btnBorrar = New Button()
-        CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
+        CType(dgvClientes, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox1.SuspendLayout()
         SuspendLayout()
         ' 
-        ' DataGridView1
+        ' dgvClientes
         ' 
-        DataGridView1.BorderStyle = BorderStyle.None
-        DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridView1.Location = New Point(39, 25)
-        DataGridView1.Name = "DataGridView1"
-        DataGridView1.Size = New Size(581, 184)
-        DataGridView1.TabIndex = 22
+        dgvClientes.BorderStyle = BorderStyle.None
+        dgvClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        dgvClientes.Location = New Point(39, 25)
+        dgvClientes.Name = "dgvClientes"
+        dgvClientes.Size = New Size(581, 184)
+        dgvClientes.TabIndex = 22
         ' 
         ' txtCorreo
         ' 
@@ -91,13 +91,13 @@ Partial Class Clientes
         txtNombre.Size = New Size(286, 16)
         txtNombre.TabIndex = 13
         ' 
-        ' txtProveedorID
+        ' txtClienteID
         ' 
-        txtProveedorID.BorderStyle = BorderStyle.None
-        txtProveedorID.Location = New Point(39, 226)
-        txtProveedorID.Name = "txtProveedorID"
-        txtProveedorID.Size = New Size(114, 16)
-        txtProveedorID.TabIndex = 21
+        txtClienteID.BorderStyle = BorderStyle.None
+        txtClienteID.Location = New Point(39, 226)
+        txtClienteID.Name = "txtClienteID"
+        txtClienteID.Size = New Size(114, 16)
+        txtClienteID.TabIndex = 21
         ' 
         ' Label4
         ' 
@@ -210,12 +210,12 @@ Partial Class Clientes
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(659, 450)
-        Controls.Add(DataGridView1)
+        Controls.Add(dgvClientes)
         Controls.Add(txtCorreo)
         Controls.Add(txtTelefono)
         Controls.Add(txtDireccion)
         Controls.Add(txtNombre)
-        Controls.Add(txtProveedorID)
+        Controls.Add(txtClienteID)
         Controls.Add(Label4)
         Controls.Add(Label3)
         Controls.Add(Label2)
@@ -224,18 +224,18 @@ Partial Class Clientes
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         Name = "Clientes"
         Text = "Clientes"
-        CType(DataGridView1, ComponentModel.ISupportInitialize).EndInit()
+        CType(dgvClientes, ComponentModel.ISupportInitialize).EndInit()
         GroupBox1.ResumeLayout(False)
         ResumeLayout(False)
         PerformLayout()
     End Sub
 
-    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents dgvClientes As DataGridView
     Friend WithEvents txtCorreo As TextBox
     Friend WithEvents txtTelefono As TextBox
     Friend WithEvents txtDireccion As TextBox
     Friend WithEvents txtNombre As TextBox
-    Friend WithEvents txtProveedorID As TextBox
+    Friend WithEvents txtClienteID As TextBox
     Friend WithEvents Label4 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents Label2 As Label

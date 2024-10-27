@@ -6,25 +6,29 @@ Public Class login
         Try
 
             Dim ConexionBD As MySqlConnection = dbConnection.OpenConnection()
-            lblTest.Text = "Conexión establecida"
+            'lblTest.Text = "Conexión establecida"
 
-            Dim query As String = "SELECT * FROM Usuarios WHERE username = @Usuario AND password = @Contraseña"
+            Dim query As String = "SELECT rol FROM Usuarios WHERE username = @Usuario AND password = @Contraseña"
             Dim command As New MySqlCommand(query, ConexionBD)
             command.Parameters.AddWithValue("@Usuario", TxtUser.Text)
             command.Parameters.AddWithValue("@Contraseña", TxtPassword.Text)
 
-            Dim result As Integer = Convert.ToInt32(command.ExecuteScalar())
+            Dim role As String = Convert.ToString(command.ExecuteScalar())
 
-            If result > 0 Then
-                MessageBox.Show("BIENVENIDO")
+            If String.IsNullOrEmpty(role) Then
+                MessageBox.Show("Usuario o contraseña incorrectos")
+            Else
+                ' Guardar el rol y el nombre del usuario en las variables globales
+                Grol = role
+                GUsername = TxtUser.Text
+
+                ' Abrir el formulario principal
                 Dim FormMenu As New MenuPrincipal()
                 FormMenu.Show()
                 Me.Hide()
-            Else
-                MessageBox.Show("Usuario o contraseña incorrectos")
             End If
         Catch ex As MySqlException
-            lblTest.Text = "Error en la conexión " & ex.ToString
+            'lblTest.Text = "Error en la conexión " & ex.ToString
 
         Finally
 
@@ -37,18 +41,19 @@ Public Class login
         Me.Hide()
     End Sub
 
-    Private Sub Conexion_Click(sender As Object, e As EventArgs) Handles Conexion.Click
-        Try
-            Dim conexion = "server=localhost;Uid=root;pwd=1234;database=inventario;SslMode=none"
-            Dim ConexionBD = New MySqlConnection(conexion)
-            ConexionBD.Open()
-            lblTest.Text = "Conexión establecida"
-        Catch ex As MySqlException
-            lblTest.Text = "Error en la conexión " & ex.ToString
+    'Private Sub Conexion_Click(sender As Object, e As EventArgs) Handles Conexion.Click
+    '    Try
+    '        Dim conexion = "server=localhost;Uid=root;pwd=1234;database=inventario;SslMode=none"
+    '        Dim ConexionBD = New MySqlConnection(conexion)
+    '        ConexionBD.Open()
+    '        lblTest.Text = "Conexión establecida"
+    '    Catch ex As MySqlException
+    '        lblTest.Text = "Error en la conexión " & ex.ToString
 
-        Finally
-            dbConnection.CloseConnection()
-        End Try
-    End Sub
+    '    Finally
+    '        dbConnection.CloseConnection()
+    '    End Try
+    'End Sub
+
 
 End Class

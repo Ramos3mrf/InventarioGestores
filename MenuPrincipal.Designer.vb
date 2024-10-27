@@ -34,21 +34,28 @@ Partial Class MenuPrincipal
         tsmRepGan = New ToolStripMenuItem()
         tsmRepExis = New ToolStripMenuItem()
         tsmExistenciasMin = New ToolStripMenuItem()
-        CerrarSesiónToolStripMenuItem = New ToolStripMenuItem()
+        tsmUsuarios = New ToolStripMenuItem()
+        tsmCerrarSesion = New ToolStripMenuItem()
+        StatusStrip1 = New StatusStrip()
+        tsslRol = New ToolStripStatusLabel()
+        PanelContenedor = New Panel()
         MenuStrip1.SuspendLayout()
+        StatusStrip1.SuspendLayout()
         SuspendLayout()
         ' 
         ' MenuStrip1
         ' 
-        MenuStrip1.Items.AddRange(New ToolStripItem() {tsmCatalogos, tsmReportes, tsmExistenciasMin, CerrarSesiónToolStripMenuItem})
+        MenuStrip1.Items.AddRange(New ToolStripItem() {tsmCatalogos, tsmReportes, tsmExistenciasMin, tsmUsuarios, tsmCerrarSesion})
         MenuStrip1.Location = New Point(0, 0)
         MenuStrip1.Name = "MenuStrip1"
-        MenuStrip1.Size = New Size(415, 24)
+        MenuStrip1.RenderMode = ToolStripRenderMode.Professional
+        MenuStrip1.Size = New Size(457, 24)
         MenuStrip1.TabIndex = 3
         MenuStrip1.Text = "MenuStrip1"
         ' 
         ' tsmCatalogos
         ' 
+        tsmCatalogos.DisplayStyle = ToolStripItemDisplayStyle.Text
         tsmCatalogos.DropDownItems.AddRange(New ToolStripItem() {tsmCatProd, tsmCatCli, tsmCatPro})
         tsmCatalogos.ForeColor = Color.Navy
         tsmCatalogos.Name = "tsmCatalogos"
@@ -78,6 +85,7 @@ Partial Class MenuPrincipal
         ' 
         ' tsmReportes
         ' 
+        tsmReportes.DisplayStyle = ToolStripItemDisplayStyle.Text
         tsmReportes.DropDownItems.AddRange(New ToolStripItem() {tsmRepComRangoF, tsmRepVenRangoF, tsmRepGan, tsmRepExis})
         tsmReportes.ForeColor = Color.Navy
         tsmReportes.Name = "tsmReportes"
@@ -114,27 +122,62 @@ Partial Class MenuPrincipal
         ' 
         ' tsmExistenciasMin
         ' 
+        tsmExistenciasMin.DisplayStyle = ToolStripItemDisplayStyle.Text
         tsmExistenciasMin.ForeColor = Color.Navy
         tsmExistenciasMin.Name = "tsmExistenciasMin"
         tsmExistenciasMin.Size = New Size(133, 20)
         tsmExistenciasMin.Text = "Existencias al mínimo"
         ' 
-        ' CerrarSesiónToolStripMenuItem
+        ' tsmUsuarios
         ' 
-        CerrarSesiónToolStripMenuItem.BackColor = Color.MistyRose
-        CerrarSesiónToolStripMenuItem.ForeColor = Color.Navy
-        CerrarSesiónToolStripMenuItem.Name = "CerrarSesiónToolStripMenuItem"
-        CerrarSesiónToolStripMenuItem.Size = New Size(87, 20)
-        CerrarSesiónToolStripMenuItem.Text = "Cerrar sesión"
+        tsmUsuarios.DisplayStyle = ToolStripItemDisplayStyle.Text
+        tsmUsuarios.ForeColor = Color.Navy
+        tsmUsuarios.Name = "tsmUsuarios"
+        tsmUsuarios.Size = New Size(64, 20)
+        tsmUsuarios.Text = "Usuarios"
+        ' 
+        ' tsmCerrarSesion
+        ' 
+        tsmCerrarSesion.BackColor = Color.MistyRose
+        tsmCerrarSesion.DisplayStyle = ToolStripItemDisplayStyle.Text
+        tsmCerrarSesion.ForeColor = Color.Navy
+        tsmCerrarSesion.Name = "tsmCerrarSesion"
+        tsmCerrarSesion.Size = New Size(87, 20)
+        tsmCerrarSesion.Text = "Cerrar sesión"
+        ' 
+        ' StatusStrip1
+        ' 
+        StatusStrip1.Items.AddRange(New ToolStripItem() {tsslRol})
+        StatusStrip1.Location = New Point(0, 371)
+        StatusStrip1.Name = "StatusStrip1"
+        StatusStrip1.Size = New Size(457, 22)
+        StatusStrip1.TabIndex = 5
+        StatusStrip1.Text = "StatusStrip1"
+        ' 
+        ' tsslRol
+        ' 
+        tsslRol.Name = "tsslRol"
+        tsslRol.Size = New Size(61, 17)
+        tsslRol.Text = "rolUsuario"
+        ' 
+        ' PanelContenedor
+        ' 
+        PanelContenedor.Dock = DockStyle.Fill
+        PanelContenedor.Location = New Point(0, 0)
+        PanelContenedor.Name = "PanelContenedor"
+        PanelContenedor.Size = New Size(457, 393)
+        PanelContenedor.TabIndex = 7
         ' 
         ' MenuPrincipal
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         AutoSize = True
-        ClientSize = New Size(415, 393)
+        ClientSize = New Size(457, 393)
         ControlBox = False
+        Controls.Add(StatusStrip1)
         Controls.Add(MenuStrip1)
+        Controls.Add(PanelContenedor)
         ForeColor = Color.Navy
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         IsMdiContainer = True
@@ -147,6 +190,8 @@ Partial Class MenuPrincipal
         WindowState = FormWindowState.Maximized
         MenuStrip1.ResumeLayout(False)
         MenuStrip1.PerformLayout()
+        StatusStrip1.ResumeLayout(False)
+        StatusStrip1.PerformLayout()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -161,6 +206,10 @@ Partial Class MenuPrincipal
     Friend WithEvents tsmRepGan As ToolStripMenuItem
     Friend WithEvents tsmRepExis As ToolStripMenuItem
     Friend WithEvents tsmExistenciasMin As ToolStripMenuItem
-    Friend WithEvents CerrarSesiónToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents tsmCerrarSesion As ToolStripMenuItem
+    Friend WithEvents tsmUsuarios As ToolStripMenuItem
+    Friend WithEvents StatusStrip1 As StatusStrip
+    Friend WithEvents tsslRol As ToolStripStatusLabel
+    Friend WithEvents PanelContenedor As Panel
 
 End Class

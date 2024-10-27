@@ -2,6 +2,7 @@
 Imports MySql.Data.MySqlClient
 
 Module Module1
+    Public GUsername, Grol As String
     Private dbConnection As New ConexionBasedeDatos()
     Public Function conectar()
         Try

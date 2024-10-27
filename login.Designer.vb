@@ -32,8 +32,6 @@ Partial Class login
         BtnAcceso = New Button()
         Label5 = New Label()
         BtnRegister = New Button()
-        Conexion = New Button()
-        lblTest = New Label()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
@@ -41,9 +39,9 @@ Partial Class login
         ' 
         PictureBox1.BackgroundImage = CType(resources.GetObject("PictureBox1.BackgroundImage"), Image)
         PictureBox1.Image = My.Resources.Resources.usuario_3d
-        PictureBox1.Location = New Point(32, 80)
+        PictureBox1.Location = New Point(-2, 58)
         PictureBox1.Name = "PictureBox1"
-        PictureBox1.Size = New Size(131, 116)
+        PictureBox1.Size = New Size(171, 168)
         PictureBox1.SizeMode = PictureBoxSizeMode.Zoom
         PictureBox1.TabIndex = 0
         PictureBox1.TabStop = False
@@ -53,7 +51,7 @@ Partial Class login
         Label1.AutoSize = True
         Label1.Font = New Font("Segoe UI Semibold", 20F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label1.ForeColor = Color.Navy
-        Label1.Location = New Point(240, 24)
+        Label1.Location = New Point(227, 24)
         Label1.Name = "Label1"
         Label1.Size = New Size(85, 37)
         Label1.TabIndex = 1
@@ -61,14 +59,14 @@ Partial Class login
         ' 
         ' TxtUser
         ' 
-        TxtUser.Location = New Point(189, 104)
+        TxtUser.Location = New Point(176, 104)
         TxtUser.Name = "TxtUser"
         TxtUser.Size = New Size(196, 23)
         TxtUser.TabIndex = 1
         ' 
         ' TxtPassword
         ' 
-        TxtPassword.Location = New Point(189, 160)
+        TxtPassword.Location = New Point(176, 160)
         TxtPassword.Name = "TxtPassword"
         TxtPassword.PasswordChar = "*"c
         TxtPassword.Size = New Size(196, 23)
@@ -78,7 +76,7 @@ Partial Class login
         ' Label2
         ' 
         Label2.AutoSize = True
-        Label2.Location = New Point(189, 86)
+        Label2.Location = New Point(176, 86)
         Label2.Name = "Label2"
         Label2.Size = New Size(60, 15)
         Label2.TabIndex = 3
@@ -87,7 +85,7 @@ Partial Class login
         ' Label3
         ' 
         Label3.AutoSize = True
-        Label3.Location = New Point(189, 142)
+        Label3.Location = New Point(176, 142)
         Label3.Name = "Label3"
         Label3.Size = New Size(67, 15)
         Label3.TabIndex = 3
@@ -97,7 +95,7 @@ Partial Class login
         ' 
         BtnAcceso.BackColor = Color.Navy
         BtnAcceso.ForeColor = Color.AliceBlue
-        BtnAcceso.Location = New Point(287, 206)
+        BtnAcceso.Location = New Point(274, 206)
         BtnAcceso.Name = "BtnAcceso"
         BtnAcceso.Size = New Size(98, 35)
         BtnAcceso.TabIndex = 3
@@ -118,30 +116,12 @@ Partial Class login
         ' 
         BtnRegister.BackColor = Color.SteelBlue
         BtnRegister.ForeColor = Color.AliceBlue
-        BtnRegister.Location = New Point(189, 206)
+        BtnRegister.Location = New Point(176, 206)
         BtnRegister.Name = "BtnRegister"
         BtnRegister.Size = New Size(92, 35)
         BtnRegister.TabIndex = 4
         BtnRegister.Text = "Registrarme"
         BtnRegister.UseVisualStyleBackColor = False
-        ' 
-        ' Conexion
-        ' 
-        Conexion.Location = New Point(32, 212)
-        Conexion.Name = "Conexion"
-        Conexion.Size = New Size(131, 23)
-        Conexion.TabIndex = 6
-        Conexion.Text = "testConexion"
-        Conexion.UseVisualStyleBackColor = True
-        ' 
-        ' lblTest
-        ' 
-        lblTest.AutoSize = True
-        lblTest.Location = New Point(32, 238)
-        lblTest.Name = "lblTest"
-        lblTest.Size = New Size(27, 15)
-        lblTest.TabIndex = 7
-        lblTest.Text = "Test"
         ' 
         ' login
         ' 
@@ -150,8 +130,6 @@ Partial Class login
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.White
         ClientSize = New Size(416, 306)
-        Controls.Add(lblTest)
-        Controls.Add(Conexion)
         Controls.Add(Label5)
         Controls.Add(BtnRegister)
         Controls.Add(BtnAcceso)
@@ -161,7 +139,9 @@ Partial Class login
         Controls.Add(TxtUser)
         Controls.Add(Label1)
         Controls.Add(PictureBox1)
+        Icon = CType(resources.GetObject("$this.Icon"), Icon)
         Name = "login"
+        StartPosition = FormStartPosition.CenterScreen
         Text = "login"
         CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
@@ -177,6 +157,4 @@ Partial Class login
     Friend WithEvents BtnAcceso As Button
     Friend WithEvents Label5 As Label
     Friend WithEvents BtnRegister As Button
-    Friend WithEvents Conexion As Button
-    Friend WithEvents lblTest As Label
 End Class
