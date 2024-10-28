@@ -15,8 +15,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MaterialSkin" Version="0.2.1" />
     <PackageReference Include="MySql.Data" Version="9.1.0" />
     <PackageReference Include="MySQLConnection" Version="1.0.1" />
+    <PackageReference Include="Syncfusion.Core.WinForms" Version="27.1.56" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
   </ItemGroup>
 

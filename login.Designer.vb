@@ -37,9 +37,10 @@ Partial Class login
         ' 
         ' PictureBox1
         ' 
+        PictureBox1.Anchor = AnchorStyles.None
         PictureBox1.BackgroundImage = CType(resources.GetObject("PictureBox1.BackgroundImage"), Image)
         PictureBox1.Image = My.Resources.Resources.usuario_3d
-        PictureBox1.Location = New Point(-2, 58)
+        PictureBox1.Location = New Point(-15, 42)
         PictureBox1.Name = "PictureBox1"
         PictureBox1.Size = New Size(171, 168)
         PictureBox1.SizeMode = PictureBoxSizeMode.Zoom
@@ -48,10 +49,11 @@ Partial Class login
         ' 
         ' Label1
         ' 
+        Label1.Anchor = AnchorStyles.None
         Label1.AutoSize = True
         Label1.Font = New Font("Segoe UI Semibold", 20F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label1.ForeColor = Color.Navy
-        Label1.Location = New Point(227, 24)
+        Label1.Location = New Point(187, 8)
         Label1.Name = "Label1"
         Label1.Size = New Size(85, 37)
         Label1.TabIndex = 1
@@ -59,24 +61,27 @@ Partial Class login
         ' 
         ' TxtUser
         ' 
-        TxtUser.Location = New Point(176, 104)
+        TxtUser.Anchor = AnchorStyles.None
+        TxtUser.Location = New Point(136, 88)
         TxtUser.Name = "TxtUser"
-        TxtUser.Size = New Size(196, 23)
+        TxtUser.Size = New Size(195, 23)
         TxtUser.TabIndex = 1
         ' 
         ' TxtPassword
         ' 
-        TxtPassword.Location = New Point(176, 160)
+        TxtPassword.Anchor = AnchorStyles.None
+        TxtPassword.Location = New Point(136, 144)
         TxtPassword.Name = "TxtPassword"
         TxtPassword.PasswordChar = "*"c
-        TxtPassword.Size = New Size(196, 23)
+        TxtPassword.Size = New Size(195, 23)
         TxtPassword.TabIndex = 2
         TxtPassword.UseSystemPasswordChar = True
         ' 
         ' Label2
         ' 
+        Label2.Anchor = AnchorStyles.None
         Label2.AutoSize = True
-        Label2.Location = New Point(176, 86)
+        Label2.Location = New Point(136, 70)
         Label2.Name = "Label2"
         Label2.Size = New Size(60, 15)
         Label2.TabIndex = 3
@@ -84,8 +89,9 @@ Partial Class login
         ' 
         ' Label3
         ' 
+        Label3.Anchor = AnchorStyles.None
         Label3.AutoSize = True
-        Label3.Location = New Point(176, 142)
+        Label3.Location = New Point(136, 126)
         Label3.Name = "Label3"
         Label3.Size = New Size(67, 15)
         Label3.TabIndex = 3
@@ -93,11 +99,12 @@ Partial Class login
         ' 
         ' BtnAcceso
         ' 
+        BtnAcceso.Anchor = AnchorStyles.None
         BtnAcceso.BackColor = Color.Navy
         BtnAcceso.ForeColor = Color.AliceBlue
-        BtnAcceso.Location = New Point(274, 206)
+        BtnAcceso.Location = New Point(234, 190)
         BtnAcceso.Name = "BtnAcceso"
-        BtnAcceso.Size = New Size(98, 35)
+        BtnAcceso.Size = New Size(97, 35)
         BtnAcceso.TabIndex = 3
         BtnAcceso.Text = "Acceder"
         BtnAcceso.UseVisualStyleBackColor = False
@@ -114,11 +121,12 @@ Partial Class login
         ' 
         ' BtnRegister
         ' 
+        BtnRegister.Anchor = AnchorStyles.None
         BtnRegister.BackColor = Color.SteelBlue
         BtnRegister.ForeColor = Color.AliceBlue
-        BtnRegister.Location = New Point(176, 206)
+        BtnRegister.Location = New Point(136, 190)
         BtnRegister.Name = "BtnRegister"
-        BtnRegister.Size = New Size(92, 35)
+        BtnRegister.Size = New Size(91, 35)
         BtnRegister.TabIndex = 4
         BtnRegister.Text = "Registrarme"
         BtnRegister.UseVisualStyleBackColor = False
@@ -129,7 +137,7 @@ Partial Class login
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.White
-        ClientSize = New Size(416, 306)
+        ClientSize = New Size(357, 275)
         Controls.Add(Label5)
         Controls.Add(BtnRegister)
         Controls.Add(BtnAcceso)

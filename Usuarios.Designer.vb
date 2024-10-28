@@ -51,11 +51,12 @@ Partial Class Usuarios
         ' 
         ' dgvUsuarios
         ' 
+        dgvUsuarios.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
         dgvUsuarios.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
         dgvUsuarios.Location = New Point(12, 12)
         dgvUsuarios.Name = "dgvUsuarios"
         dgvUsuarios.ReadOnly = True
-        dgvUsuarios.Size = New Size(455, 243)
+        dgvUsuarios.Size = New Size(470, 243)
         dgvUsuarios.TabIndex = 4
         ' 
         ' txtRol
@@ -135,12 +136,13 @@ Partial Class Usuarios
         ' 
         ' GroupBox1
         ' 
+        GroupBox1.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         GroupBox1.Controls.Add(btnSalir)
         GroupBox1.Controls.Add(btnNuevo)
         GroupBox1.Controls.Add(btnGuardar)
         GroupBox1.Controls.Add(btnBorrar)
         GroupBox1.ForeColor = Color.Navy
-        GroupBox1.Location = New Point(524, 12)
+        GroupBox1.Location = New Point(526, 12)
         GroupBox1.Name = "GroupBox1"
         GroupBox1.Size = New Size(106, 206)
         GroupBox1.TabIndex = 21
@@ -193,6 +195,7 @@ Partial Class Usuarios
         ' 
         ' GroupBox2
         ' 
+        GroupBox2.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
         GroupBox2.Controls.Add(txtUsuarioID)
         GroupBox2.Controls.Add(txtRol)
         GroupBox2.Controls.Add(txtContrasena)
@@ -201,9 +204,9 @@ Partial Class Usuarios
         GroupBox2.Controls.Add(txtNombre)
         GroupBox2.Controls.Add(Label3)
         GroupBox2.ForeColor = Color.Navy
-        GroupBox2.Location = New Point(12, 266)
+        GroupBox2.Location = New Point(24, 281)
         GroupBox2.Name = "GroupBox2"
-        GroupBox2.Size = New Size(618, 172)
+        GroupBox2.Size = New Size(610, 172)
         GroupBox2.TabIndex = 23
         GroupBox2.TabStop = False
         GroupBox2.Text = "Datos del Usuario"
@@ -212,7 +215,7 @@ Partial Class Usuarios
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(663, 450)
+        ClientSize = New Size(678, 480)
         Controls.Add(GroupBox1)
         Controls.Add(GroupBox2)
         Controls.Add(dgvUsuarios)

@@ -21,6 +21,8 @@ Public Class login
                 ' Guardar el rol y el nombre del usuario en las variables globales
                 Grol = role
                 GUsername = TxtUser.Text
+                TxtUser.Text = ""
+                TxtPassword.Text = ""
 
                 ' Abrir el formulario principal
                 Dim FormMenu As New MenuPrincipal()
@@ -36,24 +38,12 @@ Public Class login
     End Sub
 
     Private Sub BtnRegister_Click(sender As Object, e As EventArgs) Handles BtnRegister.Click
-        Dim registroForm As New Registro()
-        registroForm.Show()
+        Dim registroForm As New pasar()
+        registroForm.ShowDialog()
         Me.Hide()
     End Sub
 
-    'Private Sub Conexion_Click(sender As Object, e As EventArgs) Handles Conexion.Click
-    '    Try
-    '        Dim conexion = "server=localhost;Uid=root;pwd=1234;database=inventario;SslMode=none"
-    '        Dim ConexionBD = New MySqlConnection(conexion)
-    '        ConexionBD.Open()
-    '        lblTest.Text = "Conexión establecida"
-    '    Catch ex As MySqlException
-    '        lblTest.Text = "Error en la conexión " & ex.ToString
-
-    '    Finally
-    '        dbConnection.CloseConnection()
-    '    End Try
-    'End Sub
-
-
+    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
+        Me.Close()
+    End Sub
 End Class
