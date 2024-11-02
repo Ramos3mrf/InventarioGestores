@@ -13,7 +13,7 @@ Public Class Compras
     End Sub
 
     Private Sub Compras_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ConexionDB = conectar()
+        ConexionDB = Module1.ConexionDB()
         'cargar el datagridview con los datos del dataset
         Dim SQL As String
         SQL = "SELECT * from compras"
@@ -42,7 +42,7 @@ Public Class Compras
         Me.txtTotal.Enabled = True
         Me.txtFecha.Focus()
     End Sub
-    Private Sub btnNuevo_Click(sender As Object, e As EventArgs) Handles btnNuevo.Click
+    Private Sub btnNuevo_Click(sender As Object, e As EventArgs)
         limpiarCampos()
         habilitarCampos()
     End Sub
@@ -147,7 +147,7 @@ Public Class Compras
 
         End If
     End Sub
-    Private Sub btnBorrar_Click(sender As Object, e As EventArgs) Handles btnBorrar.Click
+    Private Sub btnBorrar_Click(sender As Object, e As EventArgs)
         If txtCompraID.Text = "" Then
             MessageBox.Show("Seleccione una compra")
             Exit Sub
@@ -166,11 +166,11 @@ Public Class Compras
         SQL = "SELECT * from compras order by fecha_compra"
         dgvCompras.DataSource = cargar_grid(SQL, ConexionDB)
     End Sub
-    Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
-        Me.Close()
+    Private Sub btnSalir_Click(sender As Object, e As EventArgs)
+        Close()
     End Sub
 
-    Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+    Private Sub btnGuardar_Click(sender As Object, e As EventArgs)
         GuardarCompra()
     End Sub
 

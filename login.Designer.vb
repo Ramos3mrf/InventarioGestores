@@ -130,6 +130,7 @@ Partial Class login
         BtnRegister.TabIndex = 4
         BtnRegister.Text = "Registrarme"
         BtnRegister.UseVisualStyleBackColor = False
+        BtnRegister.Visible = False
         ' 
         ' login
         ' 

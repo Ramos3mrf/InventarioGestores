@@ -73,4 +73,14 @@ Public Class MenuPrincipal
         Dim VentasForm As New Ventas()
         VentasForm.Show()
     End Sub
+
+    Private Sub tlsDetalleCompra_Click(sender As Object, e As EventArgs) Handles tlsDetalleCompra.Click
+        Dim compraNuevaProd As New detalle_compra()
+        compraNuevaProd.Show()
+    End Sub
+
+    Private Sub tlsDetalleVenta_Click(sender As Object, e As EventArgs) Handles tlsDetalleVenta.Click
+        Dim clienteCompra As New detalle_venta()
+        clienteCompra.Show()
+    End Sub
 End Class

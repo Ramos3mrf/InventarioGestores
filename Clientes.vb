@@ -7,7 +7,7 @@ Public Class Clientes
     Private ConexionDB As MySqlConnection
 
     Private Sub Clientes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ConexionDB = conectar()
+        ConexionDB = Module1.ConexionDB()
         'cargar el datagridview con los datos del dataset
         Dim SQL As String
         SQL = "SELECT * from clientes"
@@ -88,12 +88,12 @@ Public Class Clientes
         cmd.ExecuteNonQuery()
         MessageBox.Show("Registro " & var)
         btnNuevo_Click(Nothing, Nothing)
-        SQL = "SELECT * from clientes order by nombre"
+        SQL = "SELECT * from clientes order by id_cliente"
         dgvClientes.DataSource = cargar_grid(SQL, ConexionDB)
         bloquearCampos()
     End Sub
 
-    Private Sub dgvProveedores_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvClientes.CellClick
+    Private Sub dgvClientes_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvClientes.CellClick
         bloquearCampos()
         ' Verifica que la fila seleccionada sea válida (que no sea el encabezado)
         If e.RowIndex >= 0 Then

@@ -35,14 +35,8 @@ Partial Class Compras
         txtTotal = New TextBox()
         GroupBox1 = New GroupBox()
         Label5 = New Label()
-        GroupBox2 = New GroupBox()
-        btnSalir = New Button()
-        btnNuevo = New Button()
-        btnGuardar = New Button()
-        btnBorrar = New Button()
         CType(dgvCompras, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox1.SuspendLayout()
-        GroupBox2.SuspendLayout()
         SuspendLayout()
         ' 
         ' dgvCompras
@@ -57,9 +51,9 @@ Partial Class Compras
         DataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText
         DataGridViewCellStyle1.WrapMode = DataGridViewTriState.False
         dgvCompras.DefaultCellStyle = DataGridViewCellStyle1
-        dgvCompras.Location = New Point(22, 57)
+        dgvCompras.Location = New Point(24, 49)
         dgvCompras.Name = "dgvCompras"
-        dgvCompras.Size = New Size(389, 321)
+        dgvCompras.Size = New Size(622, 197)
         dgvCompras.TabIndex = 0
         ' 
         ' Label1
@@ -83,7 +77,7 @@ Partial Class Compras
         ' Label3
         ' 
         Label3.AutoSize = True
-        Label3.Location = New Point(13, 89)
+        Label3.Location = New Point(233, 31)
         Label3.Name = "Label3"
         Label3.Size = New Size(101, 15)
         Label3.TabIndex = 3
@@ -92,7 +86,7 @@ Partial Class Compras
         ' Label4
         ' 
         Label4.AutoSize = True
-        Label4.Location = New Point(76, 120)
+        Label4.Location = New Point(296, 62)
         Label4.Name = "Label4"
         Label4.Size = New Size(35, 15)
         Label4.TabIndex = 7
@@ -107,7 +101,7 @@ Partial Class Compras
         ' 
         ' txtFecha
         ' 
-        txtFecha.Location = New Point(120, 86)
+        txtFecha.Location = New Point(340, 28)
         txtFecha.Name = "txtFecha"
         txtFecha.Size = New Size(100, 23)
         txtFecha.TabIndex = 6
@@ -121,7 +115,7 @@ Partial Class Compras
         ' 
         ' txtTotal
         ' 
-        txtTotal.Location = New Point(120, 117)
+        txtTotal.Location = New Point(340, 59)
         txtTotal.Name = "txtTotal"
         txtTotal.Size = New Size(100, 23)
         txtTotal.TabIndex = 8
@@ -137,9 +131,9 @@ Partial Class Compras
         GroupBox1.Controls.Add(txtProveedorID)
         GroupBox1.Controls.Add(Label3)
         GroupBox1.Controls.Add(txtCompraID)
-        GroupBox1.Location = New Point(424, 217)
+        GroupBox1.Location = New Point(98, 278)
         GroupBox1.Name = "GroupBox1"
-        GroupBox1.Size = New Size(235, 161)
+        GroupBox1.Size = New Size(484, 107)
         GroupBox1.TabIndex = 9
         GroupBox1.TabStop = False
         GroupBox1.Text = " "
@@ -149,70 +143,11 @@ Partial Class Compras
         Label5.Anchor = AnchorStyles.Top
         Label5.AutoSize = True
         Label5.Font = New Font("Segoe UI", 15F, FontStyle.Bold)
-        Label5.Location = New Point(160, 20)
+        Label5.Location = New Point(281, 9)
         Label5.Name = "Label5"
         Label5.Size = New Size(108, 28)
         Label5.TabIndex = 10
         Label5.Text = "COMPRAS"
-        ' 
-        ' GroupBox2
-        ' 
-        GroupBox2.Anchor = AnchorStyles.Top Or AnchorStyles.Right
-        GroupBox2.Controls.Add(btnSalir)
-        GroupBox2.Controls.Add(btnNuevo)
-        GroupBox2.Controls.Add(btnGuardar)
-        GroupBox2.Controls.Add(btnBorrar)
-        GroupBox2.ForeColor = Color.Navy
-        GroupBox2.Location = New Point(467, 108)
-        GroupBox2.Name = "GroupBox2"
-        GroupBox2.Size = New Size(192, 103)
-        GroupBox2.TabIndex = 22
-        GroupBox2.TabStop = False
-        GroupBox2.Text = "Acciones"
-        ' 
-        ' btnSalir
-        ' 
-        btnSalir.FlatStyle = FlatStyle.Flat
-        btnSalir.ForeColor = Color.Maroon
-        btnSalir.Location = New Point(98, 63)
-        btnSalir.Name = "btnSalir"
-        btnSalir.Size = New Size(75, 23)
-        btnSalir.TabIndex = 8
-        btnSalir.Text = "Salir"
-        btnSalir.UseVisualStyleBackColor = True
-        ' 
-        ' btnNuevo
-        ' 
-        btnNuevo.FlatStyle = FlatStyle.Flat
-        btnNuevo.ForeColor = Color.Navy
-        btnNuevo.Location = New Point(17, 29)
-        btnNuevo.Name = "btnNuevo"
-        btnNuevo.Size = New Size(75, 23)
-        btnNuevo.TabIndex = 5
-        btnNuevo.Text = "Nuevo"
-        btnNuevo.UseVisualStyleBackColor = True
-        ' 
-        ' btnGuardar
-        ' 
-        btnGuardar.FlatStyle = FlatStyle.Flat
-        btnGuardar.ForeColor = Color.Green
-        btnGuardar.Location = New Point(98, 29)
-        btnGuardar.Name = "btnGuardar"
-        btnGuardar.Size = New Size(75, 23)
-        btnGuardar.TabIndex = 6
-        btnGuardar.Text = "Guardar"
-        btnGuardar.UseVisualStyleBackColor = True
-        ' 
-        ' btnBorrar
-        ' 
-        btnBorrar.FlatStyle = FlatStyle.Flat
-        btnBorrar.ForeColor = Color.Red
-        btnBorrar.Location = New Point(17, 63)
-        btnBorrar.Name = "btnBorrar"
-        btnBorrar.Size = New Size(75, 23)
-        btnBorrar.TabIndex = 7
-        btnBorrar.Text = "Borrar"
-        btnBorrar.UseVisualStyleBackColor = True
         ' 
         ' Compras
         ' 
@@ -220,10 +155,9 @@ Partial Class Compras
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.Snow
         ClientSize = New Size(671, 407)
-        Controls.Add(GroupBox2)
         Controls.Add(Label5)
-        Controls.Add(dgvCompras)
         Controls.Add(GroupBox1)
+        Controls.Add(dgvCompras)
         ForeColor = Color.Navy
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         Name = "Compras"
@@ -232,7 +166,6 @@ Partial Class Compras
         CType(dgvCompras, ComponentModel.ISupportInitialize).EndInit()
         GroupBox1.ResumeLayout(False)
         GroupBox1.PerformLayout()
-        GroupBox2.ResumeLayout(False)
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -248,10 +181,5 @@ Partial Class Compras
     Friend WithEvents txtTotal As TextBox
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents Label5 As Label
-    Friend WithEvents GroupBox2 As GroupBox
-    Friend WithEvents btnSalir As Button
-    Friend WithEvents btnNuevo As Button
-    Friend WithEvents btnGuardar As Button
-    Friend WithEvents btnBorrar As Button
 
 End Class

@@ -33,13 +33,15 @@ Partial Class MenuPrincipal
         tsmVentas = New ToolStripMenuItem()
         tsmGanancias = New ToolStripMenuItem()
         tsmExistencias = New ToolStripMenuItem()
+        tlsDetalleCompra = New ToolStripMenuItem()
+        tlsDetalleVenta = New ToolStripMenuItem()
         tsmExistenciasMin = New ToolStripMenuItem()
         tsmUsuarios = New ToolStripMenuItem()
         tsmCerrarSesion = New ToolStripMenuItem()
         StatusStrip1 = New StatusStrip()
+        ToolStripSplitButton1 = New ToolStripSplitButton()
         tsslRol = New ToolStripStatusLabel()
         PanelContenedor = New Panel()
-        ToolStripSplitButton1 = New ToolStripSplitButton()
         MenuStrip1.SuspendLayout()
         StatusStrip1.SuspendLayout()
         PanelContenedor.SuspendLayout()
@@ -68,7 +70,7 @@ Partial Class MenuPrincipal
         tsmCatProd.ForeColor = Color.Navy
         tsmCatProd.Image = My.Resources.Resources.agregar_producto
         tsmCatProd.Name = "tsmCatProd"
-        tsmCatProd.Size = New Size(139, 22)
+        tsmCatProd.Size = New Size(180, 22)
         tsmCatProd.Text = "Productos"
         ' 
         ' tsmCatCli
@@ -76,7 +78,7 @@ Partial Class MenuPrincipal
         tsmCatCli.ForeColor = Color.Navy
         tsmCatCli.Image = My.Resources.Resources.personas
         tsmCatCli.Name = "tsmCatCli"
-        tsmCatCli.Size = New Size(139, 22)
+        tsmCatCli.Size = New Size(180, 22)
         tsmCatCli.Text = " Clientes"
         ' 
         ' tsmCatPro
@@ -84,13 +86,13 @@ Partial Class MenuPrincipal
         tsmCatPro.ForeColor = Color.Navy
         tsmCatPro.Image = My.Resources.Resources.servicio_de_administracion
         tsmCatPro.Name = "tsmCatPro"
-        tsmCatPro.Size = New Size(139, 22)
+        tsmCatPro.Size = New Size(180, 22)
         tsmCatPro.Text = "Proveedores"
         ' 
         ' tsmReportes
         ' 
         tsmReportes.DisplayStyle = ToolStripItemDisplayStyle.Text
-        tsmReportes.DropDownItems.AddRange(New ToolStripItem() {tsmCompras, tsmVentas, tsmGanancias, tsmExistencias})
+        tsmReportes.DropDownItems.AddRange(New ToolStripItem() {tsmCompras, tsmVentas, tsmGanancias, tsmExistencias, tlsDetalleCompra, tlsDetalleVenta})
         tsmReportes.ForeColor = Color.Navy
         tsmReportes.Name = "tsmReportes"
         tsmReportes.Size = New Size(72, 20)
@@ -101,7 +103,7 @@ Partial Class MenuPrincipal
         tsmCompras.ForeColor = Color.Navy
         tsmCompras.Image = My.Resources.Resources.orden
         tsmCompras.Name = "tsmCompras"
-        tsmCompras.Size = New Size(146, 22)
+        tsmCompras.Size = New Size(241, 22)
         tsmCompras.Text = "Compras"
         ' 
         ' tsmVentas
@@ -109,22 +111,36 @@ Partial Class MenuPrincipal
         tsmVentas.ForeColor = Color.Navy
         tsmVentas.Image = My.Resources.Resources.ventas
         tsmVentas.Name = "tsmVentas"
-        tsmVentas.Size = New Size(146, 22)
+        tsmVentas.Size = New Size(241, 22)
         tsmVentas.Text = "Ventas"
         ' 
         ' tsmGanancias
         ' 
         tsmGanancias.ForeColor = Color.Navy
         tsmGanancias.Name = "tsmGanancias"
-        tsmGanancias.Size = New Size(146, 22)
+        tsmGanancias.Size = New Size(241, 22)
         tsmGanancias.Text = "Ganancias***"
         ' 
         ' tsmExistencias
         ' 
         tsmExistencias.ForeColor = Color.Navy
         tsmExistencias.Name = "tsmExistencias"
-        tsmExistencias.Size = New Size(146, 22)
+        tsmExistencias.Size = New Size(241, 22)
         tsmExistencias.Text = "Existencias***"
+        ' 
+        ' tlsDetalleCompra
+        ' 
+        tlsDetalleCompra.ForeColor = Color.Navy
+        tlsDetalleCompra.Name = "tlsDetalleCompra"
+        tlsDetalleCompra.Size = New Size(241, 22)
+        tlsDetalleCompra.Text = "Detalle Compra - Facturar"
+        ' 
+        ' tlsDetalleVenta
+        ' 
+        tlsDetalleVenta.ForeColor = Color.Navy
+        tlsDetalleVenta.Name = "tlsDetalleVenta"
+        tlsDetalleVenta.Size = New Size(241, 22)
+        tlsDetalleVenta.Text = "Detalle Venta - Cancelar Factura"
         ' 
         ' tsmExistenciasMin
         ' 
@@ -160,27 +176,12 @@ Partial Class MenuPrincipal
         StatusStrip1.Dock = DockStyle.None
         StatusStrip1.Items.AddRange(New ToolStripItem() {ToolStripSplitButton1, tsslRol})
         StatusStrip1.LayoutStyle = ToolStripLayoutStyle.Flow
-        StatusStrip1.Location = New Point(288, 58)
+        StatusStrip1.Location = New Point(288, 114)
         StatusStrip1.Name = "StatusStrip1"
         StatusStrip1.Size = New Size(108, 22)
         StatusStrip1.Stretch = False
         StatusStrip1.TabIndex = 5
         StatusStrip1.Text = "StatusStrip1"
-        ' 
-        ' tsslRol
-        ' 
-        tsslRol.Name = "tsslRol"
-        tsslRol.Size = New Size(61, 17)
-        tsslRol.Text = "rolUsuario"
-        ' 
-        ' PanelContenedor
-        ' 
-        PanelContenedor.Controls.Add(StatusStrip1)
-        PanelContenedor.Dock = DockStyle.Fill
-        PanelContenedor.Location = New Point(0, 0)
-        PanelContenedor.Name = "PanelContenedor"
-        PanelContenedor.Size = New Size(396, 80)
-        PanelContenedor.TabIndex = 7
         ' 
         ' ToolStripSplitButton1
         ' 
@@ -191,12 +192,27 @@ Partial Class MenuPrincipal
         ToolStripSplitButton1.Size = New Size(32, 20)
         ToolStripSplitButton1.Text = "ToolStripSplitButton1"
         ' 
+        ' tsslRol
+        ' 
+        tsslRol.Name = "tsslRol"
+        tsslRol.Size = New Size(61, 15)
+        tsslRol.Text = "rolUsuario"
+        ' 
+        ' PanelContenedor
+        ' 
+        PanelContenedor.Controls.Add(StatusStrip1)
+        PanelContenedor.Dock = DockStyle.Fill
+        PanelContenedor.Location = New Point(0, 0)
+        PanelContenedor.Name = "PanelContenedor"
+        PanelContenedor.Size = New Size(396, 136)
+        PanelContenedor.TabIndex = 7
+        ' 
         ' MenuPrincipal
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         AutoSize = True
-        ClientSize = New Size(396, 80)
+        ClientSize = New Size(396, 136)
         ControlBox = False
         Controls.Add(MenuStrip1)
         Controls.Add(PanelContenedor)
@@ -236,5 +252,7 @@ Partial Class MenuPrincipal
     Friend WithEvents tsslRol As ToolStripStatusLabel
     Friend WithEvents PanelContenedor As Panel
     Friend WithEvents ToolStripSplitButton1 As ToolStripSplitButton
+    Friend WithEvents tlsDetalleCompra As ToolStripMenuItem
+    Friend WithEvents tlsDetalleVenta As ToolStripMenuItem
 
 End Class

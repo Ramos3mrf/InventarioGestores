@@ -4,7 +4,7 @@ Imports MySql.Data.MySqlClient
 Module Module1
     Public GUsername, Grol As String
     Private dbConnection As New ConexionBasedeDatos()
-    Public Function conectar()
+    Public Function ConexionDB()
         Try
             Dim ConexionBD As MySqlConnection = dbConnection.OpenConnection()
         Catch ex As MySqlException

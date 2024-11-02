@@ -7,7 +7,7 @@ Public Class Proveedores
     Private ConexionDB As MySqlConnection
 
     Private Sub Proveedores_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ConexionDB = conectar()
+        ConexionDB = Module1.ConexionDB()
         'cargar el datagridview con los datos del dataset
         Dim SQL As String
         SQL = "SELECT * from proveedores"

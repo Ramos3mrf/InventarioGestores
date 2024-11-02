@@ -4,11 +4,9 @@ Public Class login
     Private dbConnection As New ConexionBasedeDatos()
     Private Sub BtnAcceso_Click(sender As Object, e As EventArgs) Handles BtnAcceso.Click
         Try
-
             Dim ConexionBD As MySqlConnection = dbConnection.OpenConnection()
-            'lblTest.Text = "Conexión establecida"
 
-            Dim query As String = "SELECT rol FROM Usuarios WHERE username = @Usuario AND password = @Contraseña"
+            Dim query As String = "SELECT rol FROM Usuarios WHERE username = @Usuario AND password=md5(@Contraseña)"
             Dim command As New MySqlCommand(query, ConexionBD)
             command.Parameters.AddWithValue("@Usuario", TxtUser.Text)
             command.Parameters.AddWithValue("@Contraseña", TxtPassword.Text)

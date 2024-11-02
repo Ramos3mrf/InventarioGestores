@@ -7,7 +7,7 @@ Public Class Usuarios
     Private ConexionDB As MySqlConnection
 
     Private Sub Usuarios_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ConexionDB = conectar()
+        ConexionDB = Module1.ConexionDB()
         'cargar el datagridview con los datos del dataset
         Dim SQL As String
         SQL = "SELECT * from usuarios"
@@ -35,53 +35,70 @@ Public Class Usuarios
         Me.txtNombre.Focus()
     End Sub
 
-    Private Sub btnNuevo_Click(sender As Object, e As EventArgs)
-        limpiarCampos()
-        habilitarCampos()
+    Private Sub btnNuevo_Click(sender As Object, e As EventArgs) Handles btnNuevo.Click
+        limpiarCampos
+        habilitarCampos
     End Sub
 
-    Private Sub btnGuardar_Click(sender As Object, e As EventArgs)
-        If txtNombre.Text = "" Then
+    Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+        ' Validar campos
+        If String.IsNullOrWhiteSpace(txtNombre.Text) Then
             MessageBox.Show("Digite el nombre del Usuario")
             txtNombre.Focus()
-            Exit Sub
+            Return
         End If
-        If txtContrasena.Text = "" Then
-            MessageBox.Show("Digite el teléfono")
+
+        If String.IsNullOrWhiteSpace(txtContrasena.Text) Then
+            MessageBox.Show("Digite la contraseña")
             txtContrasena.Focus()
-            Exit Sub
+            Return
         End If
-        If txtRol.Text = "" Then
-            MessageBox.Show("Digite el correo")
+
+        If String.IsNullOrWhiteSpace(txtRol.Text) Then
+            MessageBox.Show("Digite el rol")
             txtRol.Focus()
-            Exit Sub
+            Return
         End If
 
+        ' Confirmar acción
         If MessageBox.Show("Desea guardar el registro?", "Sistema de Inventario", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then
-
-            Exit Sub
-
+            Return
         End If
 
-        Dim SQL, var As String
-        SQL = "select id_usuario from usuarios WHERE id_usuario = '" & txtUsuarioID.Text & "'"
-        Dim cmd As New MySqlCommand(SQL, ConexionDB)
-        cmd.CommandType = CommandType.Text
-        Dim lectura = cmd.ExecuteReader
-        If lectura.HasRows Then
-            var = "Actualizado"
-            SQL = "UPDATE usuarios set nombre='" & txtNombre.Text & "' " & "',telefono='" & txtContrasena.Text & "',email='" & txtRol.Text & "' where id_usuairo='" & txtUsuarioID.Text & "'"
-        Else
+        ' Preparar la consulta SQL
+        Dim SQL As String
+        Dim var As String
+
+        If String.IsNullOrWhiteSpace(txtUsuarioID.Text) Then
+            ' Insertar nuevo usuario
+            SQL = "INSERT INTO usuarios (username, password, rol) VALUES (@username, MD5(@password), @rol)"
             var = "Guardado"
-            SQL = "INSERT INTO usuario values(null,'" & txtNombre.Text & "','" & "','" & txtContrasena.Text & "','" & txtRol.Text & "')"
+        Else
+            ' Actualizar usuario existente
+            SQL = "UPDATE usuarios SET username = @username, password = MD5(@password), rol = @rol WHERE id_usuario = @id_usuario"
+            var = "Actualizado"
         End If
-        lectura.Close()
-        cmd.CommandText = SQL
-        cmd.ExecuteNonQuery()
+
+        ' Ejecutar la consulta
+        Using cmd As New MySqlCommand(SQL, ConexionDB)
+            cmd.Parameters.AddWithValue("@username", txtNombre.Text)
+            cmd.Parameters.AddWithValue("@password", txtContrasena.Text)
+            cmd.Parameters.AddWithValue("@rol", txtRol.Text)
+
+            If Not String.IsNullOrWhiteSpace(txtUsuarioID.Text) Then
+                cmd.Parameters.AddWithValue("@id_usuario", txtUsuarioID.Text)
+            End If
+
+            cmd.ExecuteNonQuery()
+        End Using
+
         MessageBox.Show("Registro " & var)
         btnNuevo_Click(Nothing, Nothing)
-        SQL = "SELECT * from usuarios order by nombre"
-        dgvUsuarios.DataSource = cargar_grid(SQL, ConexionDB)
+
+        ' Actualizar el DataGridView
+        Dim query As String = "SELECT * FROM usuarios ORDER BY username"
+        dgvUsuarios.DataSource = cargar_grid(query, ConexionDB)
+
         bloquearCampos()
     End Sub
 
@@ -102,7 +119,7 @@ Public Class Usuarios
         End If
     End Sub
 
-    Private Sub btnBorrar_Click(sender As Object, e As EventArgs)
+    Private Sub btnBorrar_Click(sender As Object, e As EventArgs) Handles btnBorrar.Click
         If txtUsuarioID.Text = "" Then
             MessageBox.Show("Seleccione un usuario")
             Exit Sub
@@ -115,10 +132,10 @@ Public Class Usuarios
         SQL = "delete from usuarios WHERE id_usuario = '" & txtUsuarioID.Text & "'"
         Dim cmd As New MySqlCommand(SQL, ConexionDB)
         cmd.CommandType = CommandType.Text
-        cmd.ExecuteNonQuery()
+        cmd.ExecuteNonQuery
         MessageBox.Show("Registro borrado")
         btnNuevo_Click(Nothing, Nothing)
-        SQL = "SELECT * from usuarios order by nombre"
+        SQL = "SELECT * from usuarios order by username"
         dgvUsuarios.DataSource = cargar_grid(SQL, ConexionDB)
     End Sub
 
