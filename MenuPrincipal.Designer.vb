@@ -35,7 +35,8 @@ Partial Class MenuPrincipal
         tsmExistencias = New ToolStripMenuItem()
         tlsDetalleCompra = New ToolStripMenuItem()
         tlsDetalleVenta = New ToolStripMenuItem()
-        tsmExistenciasMin = New ToolStripMenuItem()
+        BuscarCompraPorFechaToolStripMenuItem = New ToolStripMenuItem()
+        BuscarVentaPorFechaToolStripMenuItem = New ToolStripMenuItem()
         tsmUsuarios = New ToolStripMenuItem()
         tsmCerrarSesion = New ToolStripMenuItem()
         StatusStrip1 = New StatusStrip()
@@ -49,7 +50,7 @@ Partial Class MenuPrincipal
         ' 
         ' MenuStrip1
         ' 
-        MenuStrip1.Items.AddRange(New ToolStripItem() {tsmCatalogos, tsmReportes, tsmExistenciasMin, tsmUsuarios, tsmCerrarSesion})
+        MenuStrip1.Items.AddRange(New ToolStripItem() {tsmCatalogos, tsmReportes, tsmUsuarios, tsmCerrarSesion})
         MenuStrip1.Location = New Point(0, 0)
         MenuStrip1.Name = "MenuStrip1"
         MenuStrip1.Size = New Size(396, 24)
@@ -70,7 +71,7 @@ Partial Class MenuPrincipal
         tsmCatProd.ForeColor = Color.Navy
         tsmCatProd.Image = My.Resources.Resources.agregar_producto
         tsmCatProd.Name = "tsmCatProd"
-        tsmCatProd.Size = New Size(180, 22)
+        tsmCatProd.Size = New Size(139, 22)
         tsmCatProd.Text = "Productos"
         ' 
         ' tsmCatCli
@@ -78,7 +79,7 @@ Partial Class MenuPrincipal
         tsmCatCli.ForeColor = Color.Navy
         tsmCatCli.Image = My.Resources.Resources.personas
         tsmCatCli.Name = "tsmCatCli"
-        tsmCatCli.Size = New Size(180, 22)
+        tsmCatCli.Size = New Size(139, 22)
         tsmCatCli.Text = " Clientes"
         ' 
         ' tsmCatPro
@@ -86,17 +87,17 @@ Partial Class MenuPrincipal
         tsmCatPro.ForeColor = Color.Navy
         tsmCatPro.Image = My.Resources.Resources.servicio_de_administracion
         tsmCatPro.Name = "tsmCatPro"
-        tsmCatPro.Size = New Size(180, 22)
+        tsmCatPro.Size = New Size(139, 22)
         tsmCatPro.Text = "Proveedores"
         ' 
         ' tsmReportes
         ' 
         tsmReportes.DisplayStyle = ToolStripItemDisplayStyle.Text
-        tsmReportes.DropDownItems.AddRange(New ToolStripItem() {tsmCompras, tsmVentas, tsmGanancias, tsmExistencias, tlsDetalleCompra, tlsDetalleVenta})
+        tsmReportes.DropDownItems.AddRange(New ToolStripItem() {tsmCompras, tsmVentas, tsmGanancias, tsmExistencias, tlsDetalleCompra, tlsDetalleVenta, BuscarCompraPorFechaToolStripMenuItem, BuscarVentaPorFechaToolStripMenuItem})
         tsmReportes.ForeColor = Color.Navy
         tsmReportes.Name = "tsmReportes"
-        tsmReportes.Size = New Size(72, 20)
-        tsmReportes.Text = "Inventario"
+        tsmReportes.Size = New Size(65, 20)
+        tsmReportes.Text = "Reportes"
         ' 
         ' tsmCompras
         ' 
@@ -131,6 +132,7 @@ Partial Class MenuPrincipal
         ' tlsDetalleCompra
         ' 
         tlsDetalleCompra.ForeColor = Color.Navy
+        tlsDetalleCompra.Image = My.Resources.Resources.factura__1_
         tlsDetalleCompra.Name = "tlsDetalleCompra"
         tlsDetalleCompra.Size = New Size(241, 22)
         tlsDetalleCompra.Text = "Detalle Compra - Facturar"
@@ -138,17 +140,26 @@ Partial Class MenuPrincipal
         ' tlsDetalleVenta
         ' 
         tlsDetalleVenta.ForeColor = Color.Navy
+        tlsDetalleVenta.Image = My.Resources.Resources.factura
         tlsDetalleVenta.Name = "tlsDetalleVenta"
         tlsDetalleVenta.Size = New Size(241, 22)
         tlsDetalleVenta.Text = "Detalle Venta - Cancelar Factura"
         ' 
-        ' tsmExistenciasMin
+        ' BuscarCompraPorFechaToolStripMenuItem
         ' 
-        tsmExistenciasMin.DisplayStyle = ToolStripItemDisplayStyle.Text
-        tsmExistenciasMin.ForeColor = Color.Navy
-        tsmExistenciasMin.Name = "tsmExistenciasMin"
-        tsmExistenciasMin.Size = New Size(148, 20)
-        tsmExistenciasMin.Text = "Existencias al mínimo***"
+        BuscarCompraPorFechaToolStripMenuItem.ForeColor = Color.Navy
+        BuscarCompraPorFechaToolStripMenuItem.Image = My.Resources.Resources.orden
+        BuscarCompraPorFechaToolStripMenuItem.Name = "BuscarCompraPorFechaToolStripMenuItem"
+        BuscarCompraPorFechaToolStripMenuItem.Size = New Size(241, 22)
+        BuscarCompraPorFechaToolStripMenuItem.Text = "Buscar compra por fecha"
+        ' 
+        ' BuscarVentaPorFechaToolStripMenuItem
+        ' 
+        BuscarVentaPorFechaToolStripMenuItem.ForeColor = Color.Navy
+        BuscarVentaPorFechaToolStripMenuItem.Image = My.Resources.Resources.ventas
+        BuscarVentaPorFechaToolStripMenuItem.Name = "BuscarVentaPorFechaToolStripMenuItem"
+        BuscarVentaPorFechaToolStripMenuItem.Size = New Size(241, 22)
+        BuscarVentaPorFechaToolStripMenuItem.Text = "Buscar venta por fecha"
         ' 
         ' tsmUsuarios
         ' 
@@ -245,7 +256,6 @@ Partial Class MenuPrincipal
     Friend WithEvents tsmVentas As ToolStripMenuItem
     Friend WithEvents tsmGanancias As ToolStripMenuItem
     Friend WithEvents tsmExistencias As ToolStripMenuItem
-    Friend WithEvents tsmExistenciasMin As ToolStripMenuItem
     Friend WithEvents tsmCerrarSesion As ToolStripMenuItem
     Friend WithEvents tsmUsuarios As ToolStripMenuItem
     Friend WithEvents StatusStrip1 As StatusStrip
@@ -254,5 +264,7 @@ Partial Class MenuPrincipal
     Friend WithEvents ToolStripSplitButton1 As ToolStripSplitButton
     Friend WithEvents tlsDetalleCompra As ToolStripMenuItem
     Friend WithEvents tlsDetalleVenta As ToolStripMenuItem
+    Friend WithEvents BuscarCompraPorFechaToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents BuscarVentaPorFechaToolStripMenuItem As ToolStripMenuItem
 
 End Class

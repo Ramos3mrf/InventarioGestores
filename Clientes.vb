@@ -12,6 +12,8 @@ Public Class Clientes
         Dim SQL As String
         SQL = "SELECT * from clientes"
         dgvClientes.DataSource = cargar_grid(SQL, ConexionDB)
+        dgvClientes.Columns("id_cliente").Width = 50
+        dgvClientes.Columns("nombre").Width = 150
     End Sub
 
     Private Sub limpiarCampos()
@@ -134,4 +136,6 @@ Public Class Clientes
     Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
         Me.Close()
     End Sub
+
+
 End Class

@@ -142,7 +142,7 @@ Partial Class detalle_venta
         ' 
         Label1.AutoSize = True
         Label1.ForeColor = Color.Navy
-        Label1.Location = New Point(277, 241)
+        Label1.Location = New Point(19, 270)
         Label1.Name = "Label1"
         Label1.Size = New Size(57, 15)
         Label1.TabIndex = 37
@@ -151,7 +151,7 @@ Partial Class detalle_venta
         ' txtIdDetalle
         ' 
         txtIdDetalle.ForeColor = Color.Navy
-        txtIdDetalle.Location = New Point(342, 238)
+        txtIdDetalle.Location = New Point(84, 267)
         txtIdDetalle.Name = "txtIdDetalle"
         txtIdDetalle.ReadOnly = True
         txtIdDetalle.Size = New Size(105, 23)
@@ -164,6 +164,7 @@ Partial Class detalle_venta
         txtIDventa.Name = "txtIDventa"
         txtIDventa.Size = New Size(70, 23)
         txtIDventa.TabIndex = 40
+        txtIDventa.Visible = False
         ' 
         ' Label2
         ' 
@@ -174,6 +175,7 @@ Partial Class detalle_venta
         Label2.Size = New Size(54, 15)
         Label2.TabIndex = 39
         Label2.Text = "id_venta:"
+        Label2.Visible = False
         ' 
         ' txtIDprod
         ' 
@@ -324,7 +326,7 @@ Partial Class detalle_venta
         ' txtTotal
         ' 
         txtTotal.ForeColor = Color.Navy
-        txtTotal.Location = New Point(56, 273)
+        txtTotal.Location = New Point(374, 248)
         txtTotal.Name = "txtTotal"
         txtTotal.Size = New Size(73, 23)
         txtTotal.TabIndex = 53
@@ -333,7 +335,7 @@ Partial Class detalle_venta
         ' 
         Label9.AutoSize = True
         Label9.ForeColor = Color.Navy
-        Label9.Location = New Point(18, 276)
+        Label9.Location = New Point(336, 251)
         Label9.Name = "Label9"
         Label9.Size = New Size(32, 15)
         Label9.TabIndex = 52

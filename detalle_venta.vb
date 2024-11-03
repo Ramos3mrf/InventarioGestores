@@ -23,6 +23,10 @@ Public Class detalle_venta
         If Not detalleVentaTable.Columns.Contains("subtotal") Then
             detalleVentaTable.Columns.Add("subtotal", GetType(Decimal))
         End If
+        If Not detalleVentaTable.Columns.Contains("id_detalle") Then
+            detalleVentaTable.Columns.Add("id_detalle", GetType(Integer))
+        End If
+
 
         ' Configurar el DataGridView para usar el DataTable modificado
         dgvDetalleVenta.DataSource = detalleVentaTable
@@ -30,6 +34,7 @@ Public Class detalle_venta
         ' Configurar el ancho de las columnas
         dgvDetalleVenta.Columns("Nombre del producto").Width = 200
         dgvDetalleVenta.Columns("cantidad").Width = 70
+        dgvDetalleVenta.Columns("id_detalle").Width = 80
 
         ' Cargar el DataGridView de Productos Cliente (izquierdo)
         SQL = "SELECT id_producto, nombre, precio_venta, stock from productos"
@@ -38,7 +43,6 @@ Public Class detalle_venta
     Private Sub LimpiarFormulario()
         txtIDventa.Clear()
         txtTotal.Clear()
-        dgvDetalleVenta.Rows.Clear()
     End Sub
 
     Private Sub dgvProdStock_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvProdStock.CellContentClick
@@ -69,15 +73,18 @@ Public Class detalle_venta
             ' Obtener el DataTable desde el DataGridView
             Dim detalleVentaTable As DataTable = CType(dgvDetalleVenta.DataSource, DataTable)
 
+            ' Generar ID de detalle (basado en la cantidad de filas + 1)
+            Dim nuevoIdDetalle As Integer = detalleVentaTable.Rows.Count + 1
+
             ' Crear una nueva fila en el DataTable
             Dim nuevaFila As DataRow = detalleVentaTable.NewRow()
 
             ' Asignar valores a las columnas del DataTable y las columnas personalizadas
+            nuevaFila("id_detalle") = nuevoIdDetalle
             nuevaFila("cantidad") = txtCantidad.Text
             nuevaFila("Nombre del producto") = dgvProdStock.CurrentRow.Cells("nombre").Value.ToString()
             nuevaFila("Precio") = txtPrecioU.Text
 
-            ' Asignar valores a las columnas adicionales (id_producto y subtotal)
             nuevaFila("id_producto") = txtIDprod.Text
             nuevaFila("subtotal") = txtSubTotal.Text
 
@@ -113,10 +120,11 @@ Public Class detalle_venta
         ' Guardar cada producto en el detalle de la venta
         For Each row As DataGridViewRow In dgvDetalleVenta.Rows
             If Not row.IsNewRow Then
+                Dim idDetalle As Integer = Integer.Parse(row.Cells("id_detalle").Value.ToString())
                 Dim idProducto As Integer = Integer.Parse(row.Cells("id_producto").Value.ToString())
                 Dim cantidad As Integer = Integer.Parse(row.Cells("cantidad").Value.ToString())
                 Dim precioUnitario As Decimal = Decimal.Parse(row.Cells("Precio").Value.ToString())
-                GuardarDetalleVenta(idVenta, idProducto, cantidad, precioUnitario)
+                GuardarDetalleVenta(idDetalle, idVenta, idProducto, cantidad, precioUnitario)
             End If
         Next
 
@@ -125,36 +133,36 @@ Public Class detalle_venta
     End Sub
 
     Private Function GuardarVenta(idCliente As String, total As String) As Integer
-        Dim fechaVenta As String = DateTime.Now.ToString("yyyy-MM-dd") ' Fecha actual
-        Dim SQL As String = "INSERT INTO Ventas (null, fecha_venta, id_cliente, total) VALUES (@fechaVenta, @idCliente, @total)"
+        ' Prepara la fecha de venta en formato adecuado para la base de datos
+        Dim fechaVenta As String = DateTime.Now.ToString("yyyy-MM-dd")
 
-        Using cmd As New MySqlCommand(SQL, Module1.ConexionDB)
-            cmd.Parameters.AddWithValue("@fechaVenta", fechaVenta)
-            cmd.Parameters.AddWithValue("@idCliente", idCliente)
-            cmd.Parameters.AddWithValue("@total", total)
+        ' Construye la consulta INSERT con parámetros para evitar la inyección SQL
+        Dim sql = "INSERT INTO Ventas (fecha_venta, id_cliente, total) VALUES (@fechaVenta, @idCliente, @total)"
 
-            Try
-                ConexionDB.Open()
-                cmd.ExecuteNonQuery()
+        Using connection = Module1.ConexionDB ' Abrir la conexión a la base de datos
+            connection.Open()  ' Abrir la conexión
 
-                ' Obtener el ID de la venta recién insertada
-                Dim idVentaGenerado As Integer
-                Dim SQLSelect As String = "SELECT SCOPE_IDENTITY()"
-                cmd.CommandText = SQLSelect
-                idVentaGenerado = Convert.ToInt32(cmd.ExecuteScalar())
-                Return idVentaGenerado
-            Catch ex As Exception
-                MessageBox.Show("Error al guardar la venta: " & ex.Message)
-                Return -1
-            Finally
-                ConexionDB.Close()
-            End Try
+            Using command As New MySqlCommand(sql, connection) ' Crear el comando
+                ' Agregar parámetros con valores seguros
+                command.Parameters.AddWithValue("@fechaVenta", fechaVenta)
+                command.Parameters.AddWithValue("@idCliente", idCliente)
+                command.Parameters.AddWithValue("@total", total)
+
+                ' Ejecutar la consulta y obtener el ID generado
+                Dim idVentaGenerado As Integer = command.ExecuteScalar() ' Obtener el ID de la venta insertada
+
+                If idVentaGenerado > 0 Then ' Verifica si se insertó correctamente
+                    Return idVentaGenerado ' Retorna el ID generado
+                Else
+                    MessageBox.Show("Error al guardar la venta.")
+                    Return -1 ' Indica un error
+                End If
+            End Using
         End Using
     End Function
 
-    Private Sub GuardarDetalleVenta(idVenta As Integer, idProducto As Integer, cantidad As Integer, precioUnitario As Decimal)
-        Dim idDetalle As Integer = txtIdDetalle.Text
-        Dim SQL As String = "INSERT INTO Detalle_Ventas (id_detalle, id_venta, id_producto, cantidad, precio_unitario, ) VALUES (@id_detalle, @idVenta, @idProducto, @cantidad, @precioUnitario)"
+    Private Sub GuardarDetalleVenta(idDetalle As Integer, idVenta As Integer, idProducto As Integer, cantidad As Integer, precioUnitario As Decimal)
+        Dim SQL As String = "INSERT INTO detalle_Ventas (id_detalle, id_venta, id_producto, cantidad, precio_unitario) VALUES (null, null, @idProducto, @cantidad, @precioUnitario)"
 
         Using cmd As New MySqlCommand(SQL, Module1.ConexionDB())
             cmd.Parameters.AddWithValue("@id_detalle", idDetalle)
@@ -164,12 +172,19 @@ Public Class detalle_venta
             cmd.Parameters.AddWithValue("@precioUnitario", precioUnitario)
 
             Try
-                ConexionDB.Open()
+                ' Verificar si la conexión ya está abierta
+                If ConexionDB.State = ConnectionState.Closed Then
+                    ConexionDB.Open()
+                End If
+
                 cmd.ExecuteNonQuery()
             Catch ex As Exception
                 MessageBox.Show("Error al guardar el detalle de la venta: " & ex.Message)
             Finally
-                ConexionDB.Close()
+                ' Verificar si la conexión está abierta antes de cerrarla
+                If ConexionDB.State = ConnectionState.Open Then
+                    ConexionDB.Close()
+                End If
             End Try
         End Using
     End Sub
@@ -198,15 +213,27 @@ Public Class detalle_venta
     Private Sub ActualizarTotal()
         Dim total As Decimal = 0
 
-        ' Recorre todas las filas para sumar el subtotal de cada producto
-        For Each row As DataGridViewRow In dgvDetalleVenta.Rows
-            If Not row.IsNewRow Then
-                total += Convert.ToDecimal(row.Cells("subtotal").Value)
+        ' Recorremos cada fila del DataGridView
+        For Each fila As DataGridViewRow In dgvDetalleVenta.Rows
+            ' Si la fila no es una nueva fila (es decir, contiene datos)
+            If Not fila.IsNewRow Then
+                ' Intentamos convertir el valor de la columna "subtotal" a decimal
+                If Decimal.TryParse(fila.Cells("subtotal").Value.ToString(), total) Then
+                    ' Si la conversión es exitosa, sumamos el valor al total
+                End If
             End If
         Next
 
-        ' Actualiza el campo de texto del total
-        txtTotal.Text = total.ToString("0.00")
+        ' Mostramos el total formateado en el TextBox
+        txtTotal.Text = total.ToString("C$") ' Formato de moneda según la configuración regional
     End Sub
 
+    Private Sub btnNuevo_Click(sender As Object, e As EventArgs) Handles btnNuevo.Click
+        LimpiarFormulario()
+        ' Asignar una fuente de datos vacía
+        dgvDetalleVenta.DataSource = Nothing
+
+        ' Opcional: Deshabilitar la edición del DataGridView
+        dgvDetalleVenta.ReadOnly = True
+    End Sub
 End Class

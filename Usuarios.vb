@@ -1,10 +1,15 @@
 ﻿Imports MySql.Data.MySqlClient
 Imports System.Data.Common
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 Public Class Usuarios
 
     'El objeto tipo conexión
     Private dbConnection As New ConexionBasedeDatos()
     Private ConexionDB As MySqlConnection
+
+    Public Sub Usuarios()
+        InitializeComponent()
+    End Sub
 
     Private Sub Usuarios_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ConexionDB = Module1.ConexionDB()
@@ -36,8 +41,8 @@ Public Class Usuarios
     End Sub
 
     Private Sub btnNuevo_Click(sender As Object, e As EventArgs) Handles btnNuevo.Click
-        limpiarCampos
-        habilitarCampos
+        limpiarCampos()
+        habilitarCampos()
     End Sub
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
@@ -132,7 +137,7 @@ Public Class Usuarios
         SQL = "delete from usuarios WHERE id_usuario = '" & txtUsuarioID.Text & "'"
         Dim cmd As New MySqlCommand(SQL, ConexionDB)
         cmd.CommandType = CommandType.Text
-        cmd.ExecuteNonQuery
+        cmd.ExecuteNonQuery()
         MessageBox.Show("Registro borrado")
         btnNuevo_Click(Nothing, Nothing)
         SQL = "SELECT * from usuarios order by username"
@@ -143,5 +148,32 @@ Public Class Usuarios
         Me.Close()
     End Sub
 
+    Private mostrarPass As Boolean = False
 
+    Private Sub lookP_Click(sender As Object, e As EventArgs) Handles lookP.Click
+        If mostrarPass Then
+            ' Ocultar contraseña
+            txtContrasena.PasswordChar = "*"
+            mostrarPass = False
+        Else
+            ' Mostrar contraseña
+            txtContrasena.PasswordChar = vbNullChar
+            mostrarPass = True
+        End If
+    End Sub
+
+    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
+        If mostrarPass Then
+            ' Ocultar contraseña
+            txtContrasena.PasswordChar = "*"
+            PictureBox1.Image = My.Resources.ocultar ' Asumir que tienes imágenes "ocultar.png" y "mostrar.png"
+            ToolTip1.SetToolTip(PictureBox1, "Ocultar")
+        Else
+            ' Mostrar contraseña
+            txtContrasena.PasswordChar = vbNullChar
+            PictureBox1.Image = My.Resources.mostrar
+            ToolTip1.SetToolTip(PictureBox1, "Mostrar")
+        End If
+        mostrarPass = Not mostrarPass
+    End Sub
 End Class

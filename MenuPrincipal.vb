@@ -83,4 +83,14 @@ Public Class MenuPrincipal
         Dim clienteCompra As New detalle_venta()
         clienteCompra.Show()
     End Sub
+
+    Private Sub BuscarCompraPorFechaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BuscarCompraPorFechaToolStripMenuItem.Click
+        Dim reporteCompraFechas As New buscarFechaCompra()
+        reporteCompraFechas.Show()
+    End Sub
+
+    Private Sub BuscarVentaPorFechaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BuscarVentaPorFechaToolStripMenuItem.Click
+        Dim reporteVentaFechas As New buscarFechaVenta()
+        reporteVentaFechas.Show()
+    End Sub
 End Class
