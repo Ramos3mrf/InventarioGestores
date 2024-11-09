@@ -22,8 +22,8 @@ Partial Class detalle_venta
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim CustomizableEdges1 As Guna.UI2.WinForms.Suite.CustomizableEdges = New Guna.UI2.WinForms.Suite.CustomizableEdges()
-        Dim CustomizableEdges2 As Guna.UI2.WinForms.Suite.CustomizableEdges = New Guna.UI2.WinForms.Suite.CustomizableEdges()
+        Dim CustomizableEdges3 As Guna.UI2.WinForms.Suite.CustomizableEdges = New Guna.UI2.WinForms.Suite.CustomizableEdges()
+        Dim CustomizableEdges4 As Guna.UI2.WinForms.Suite.CustomizableEdges = New Guna.UI2.WinForms.Suite.CustomizableEdges()
         dgvDetalleVenta = New DataGridView()
         id_detalle = New DataGridViewTextBoxColumn()
         id_producto = New DataGridViewTextBoxColumn()
@@ -33,7 +33,6 @@ Partial Class detalle_venta
         subtotal = New DataGridViewTextBoxColumn()
         GroupBox2 = New GroupBox()
         btnAdd = New Button()
-        btnNuevo = New Button()
         btnGuardar = New Button()
         btnBorrar = New Button()
         Label3 = New Label()
@@ -125,7 +124,6 @@ Partial Class detalle_venta
         ' 
         GroupBox2.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         GroupBox2.Controls.Add(btnAdd)
-        GroupBox2.Controls.Add(btnNuevo)
         GroupBox2.Controls.Add(btnGuardar)
         GroupBox2.Controls.Add(btnBorrar)
         GroupBox2.ForeColor = Color.Navy
@@ -140,23 +138,12 @@ Partial Class detalle_venta
         ' 
         btnAdd.FlatStyle = FlatStyle.Flat
         btnAdd.ForeColor = Color.Green
-        btnAdd.Location = New Point(94, 24)
+        btnAdd.Location = New Point(17, 24)
         btnAdd.Name = "btnAdd"
         btnAdd.Size = New Size(75, 28)
         btnAdd.TabIndex = 9
         btnAdd.Text = "Agregar"
         btnAdd.UseVisualStyleBackColor = True
-        ' 
-        ' btnNuevo
-        ' 
-        btnNuevo.FlatStyle = FlatStyle.Flat
-        btnNuevo.ForeColor = Color.Navy
-        btnNuevo.Location = New Point(17, 24)
-        btnNuevo.Name = "btnNuevo"
-        btnNuevo.Size = New Size(75, 28)
-        btnNuevo.TabIndex = 5
-        btnNuevo.Text = "Nuevo"
-        btnNuevo.UseVisualStyleBackColor = True
         ' 
         ' btnGuardar
         ' 
@@ -165,16 +152,16 @@ Partial Class detalle_venta
         btnGuardar.ForeColor = Color.White
         btnGuardar.Location = New Point(17, 55)
         btnGuardar.Name = "btnGuardar"
-        btnGuardar.Size = New Size(75, 28)
+        btnGuardar.Size = New Size(156, 28)
         btnGuardar.TabIndex = 6
-        btnGuardar.Text = "Guardar detalle"
+        btnGuardar.Text = "Guardar venta"
         btnGuardar.UseVisualStyleBackColor = False
         ' 
         ' btnBorrar
         ' 
         btnBorrar.FlatStyle = FlatStyle.Flat
         btnBorrar.ForeColor = Color.Red
-        btnBorrar.Location = New Point(94, 55)
+        btnBorrar.Location = New Point(98, 24)
         btnBorrar.Name = "btnBorrar"
         btnBorrar.Size = New Size(75, 28)
         btnBorrar.TabIndex = 7
@@ -402,7 +389,7 @@ Partial Class detalle_venta
         ' 
         Salir.BorderColor = Color.Navy
         Salir.BorderRadius = 20
-        Salir.CustomizableEdges = CustomizableEdges1
+        Salir.CustomizableEdges = CustomizableEdges3
         Salir.DisabledState.BorderColor = Color.DarkGray
         Salir.DisabledState.CustomBorderColor = Color.DarkGray
         Salir.DisabledState.FillColor = Color.FromArgb(CByte(169), CByte(169), CByte(169))
@@ -414,7 +401,7 @@ Partial Class detalle_venta
         Salir.Name = "Salir"
         Salir.PressedColor = Color.Red
         Salir.ShadowDecoration.Color = Color.FromArgb(CByte(192), CByte(0), CByte(192))
-        Salir.ShadowDecoration.CustomizableEdges = CustomizableEdges2
+        Salir.ShadowDecoration.CustomizableEdges = CustomizableEdges4
         Salir.ShadowDecoration.Shadow = New Padding(50)
         Salir.Size = New Size(76, 36)
         Salir.TabIndex = 54
@@ -425,7 +412,7 @@ Partial Class detalle_venta
         cmbClientes.FormattingEnabled = True
         cmbClientes.Location = New Point(123, 248)
         cmbClientes.Name = "cmbClientes"
-        cmbClientes.Size = New Size(334, 23)
+        cmbClientes.Size = New Size(329, 23)
         cmbClientes.TabIndex = 56
         ' 
         ' bntNuevoCliente
@@ -466,7 +453,6 @@ Partial Class detalle_venta
 
     Friend WithEvents dgvDetalleVenta As DataGridView
     Friend WithEvents GroupBox2 As GroupBox
-    Friend WithEvents btnNuevo As Button
     Friend WithEvents btnGuardar As Button
     Friend WithEvents btnBorrar As Button
     Friend WithEvents Label3 As Label

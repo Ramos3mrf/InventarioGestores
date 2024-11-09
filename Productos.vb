@@ -14,13 +14,13 @@ Public Class Productos
     End Sub
 
     Private Sub limpiarCampos()
-        Me.txtProductoID.Text = ""
-        Me.txtProveedorID.Text = ""
+        'Me.txtProductoID.Text = ""
+        'Me.txtProveedorID.Text = ""
         Me.txtNombre.Text = ""
         Me.txtDescripcion.Text = ""
         Me.txtCompra.Text = ""
         Me.txtGanancia.Text = ""
-        Me.txtVenta.Text = ""
+        Me.txtPrecioVenta.Text = ""
         Me.txtStock.Text = ""
         Me.txtStockMin.Text = ""
         Me.txtNombre.Focus()
@@ -31,7 +31,7 @@ Public Class Productos
         Me.txtDescripcion.Enabled = False
         Me.txtCompra.Enabled = False
         Me.txtGanancia.Enabled = False
-        Me.txtVenta.Enabled = False
+        Me.txtPrecioVenta.Enabled = False
         Me.txtStock.Enabled = False
         Me.txtStockMin.Enabled = False
     End Sub
@@ -41,7 +41,7 @@ Public Class Productos
         Me.txtDescripcion.Enabled = True
         Me.txtCompra.Enabled = True
         Me.txtGanancia.Enabled = True
-        Me.txtVenta.Enabled = True
+        Me.txtPrecioVenta.Enabled = True
         Me.txtStock.Enabled = True
         Me.txtStockMin.Enabled = True
         Me.txtNombre.Focus()
@@ -58,11 +58,11 @@ Public Class Productos
             txtNombre.Focus()
             Return False
         End If
-        If txtProveedorID.Text = "" Then
-            MessageBox.Show("Digite el Id del proveedor")
-            txtProveedorID.Focus()
-            Return False
-        End If
+        'If txtProveedorID.Text = "" Then
+        '    MessageBox.Show("Digite el Id del proveedor")
+        '    txtProveedorID.Focus()
+        '    Return False
+        'End If
         If txtDescripcion.Text = "" Then
             MessageBox.Show("Digite la descripción del producto")
             txtDescripcion.Focus()
@@ -78,11 +78,8 @@ Public Class Productos
             txtGanancia.Focus()
             Return False
         End If
-        If txtVenta.Text = "" Then
-            MessageBox.Show("Digite el precio de venta del producto")
-            txtVenta.Focus()
-            Return False
-        End If
+
+
         If txtStock.Text = "" Then
             MessageBox.Show("Digite la cantidad en Stock del producto")
             txtStock.Focus()
@@ -114,7 +111,7 @@ Public Class Productos
             ' Consulta para verificar si el producto existe
             SQL = "SELECT id_producto FROM productos WHERE id_producto = @id_producto"
             cmd.CommandText = SQL
-            cmd.Parameters.AddWithValue("@id_producto", txtProductoID.Text)
+            'cmd.Parameters.AddWithValue("@id_producto", txtProductoID.Text)
 
             ' Ejecutar consulta de verificación
             Dim exists As Boolean = cmd.ExecuteScalar() IsNot Nothing
@@ -138,13 +135,13 @@ Public Class Productos
             cmd.Parameters.AddWithValue("@descripcion", txtDescripcion.Text)
             cmd.Parameters.AddWithValue("@precio_compra", txtCompra.Text)
             cmd.Parameters.AddWithValue("@porcentaje_ganancia", txtGanancia.Text)
-            cmd.Parameters.AddWithValue("@precio_venta", txtVenta.Text)
+            cmd.Parameters.AddWithValue("@precio_venta", txtPrecioVenta.Text)
             cmd.Parameters.AddWithValue("@stock", txtStock.Text)
             cmd.Parameters.AddWithValue("@stock_minimo", txtStockMin.Text)
-            cmd.Parameters.AddWithValue("@id_proveedor", txtProveedorID.Text)
-            If exists Then
-                cmd.Parameters.AddWithValue("@id_producto", txtProductoID.Text)
-            End If
+            'cmd.Parameters.AddWithValue("@id_proveedor", txtProveedorID.Text)
+            'If exists Then
+            '    cmd.Parameters.AddWithValue("@id_producto", txtProductoID.Text)
+            'End If
 
             ' Ejecutar el comando
             cmd.ExecuteNonQuery()
@@ -167,38 +164,38 @@ Public Class Productos
             Dim row As DataGridViewRow = dgvProductos.Rows(e.RowIndex)
 
             ' Asigna el ID del proveedor al TextBox idProveedor
-            txtProductoID.Text = row.Cells("id_producto").Value.ToString()
-            txtProveedorID.Text = row.Cells("id_proveedor").Value.ToString()
+            'txtProductoID.Text = row.Cells("id_producto").Value.ToString()
+            'txtProveedorID.Text = row.Cells("id_proveedor").Value.ToString()
 
             ' Carga los demás datos en los TextBox correspondientes
             txtNombre.Text = row.Cells("nombre").Value.ToString()
             txtDescripcion.Text = row.Cells("descripcion").Value.ToString()
             txtCompra.Text = row.Cells("precio_compra").Value.ToString()
             txtGanancia.Text = row.Cells("porcentaje_ganancia").Value.ToString()
-            txtVenta.Text = row.Cells("precio_venta").Value.ToString()
+            txtPrecioVenta.Text = row.Cells("precio_venta").Value.ToString()
             txtStock.Text = row.Cells("stock").Value.ToString()
             txtStockMin.Text = row.Cells("stock_minimo").Value.ToString()
 
         End If
     End Sub
     Private Sub btnBorrar_Click(sender As Object, e As EventArgs) Handles btnBorrar.Click
-        If txtProveedorID.Text = "" Then
-            MessageBox.Show("Seleccione un producto")
-            Exit Sub
-        End If
-        If MessageBox.Show("Desea eliminar el registro?", "Sistema de Inventario", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then
+        'If txtProveedorID.Text = "" Then
+        '    MessageBox.Show("Seleccione un producto")
+        '    Exit Sub
+        'End If
+        'If MessageBox.Show("Desea eliminar el registro?", "Sistema de Inventario", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then
 
-            Exit Sub
-        End If
-        Dim SQL As String
-        SQL = "delete from producto WHERE id_producto = '" & txtProductoID.Text & "'"
-        Dim cmd As New MySqlCommand(SQL, ConexionDB)
-        cmd.CommandType = CommandType.Text
-        cmd.ExecuteNonQuery()
-        MessageBox.Show("Registro borrado")
-        btnNuevo_Click(Nothing, Nothing)
-        SQL = "SELECT * from productos order by nombre"
-        dgvProductos.DataSource = cargar_grid(SQL, ConexionDB)
+        '    Exit Sub
+        'End If
+        'Dim SQL As String
+        'SQL = "delete from producto WHERE id_producto = '" & txtProductoID.Text & "'"
+        'Dim cmd As New MySqlCommand(SQL, ConexionDB)
+        'cmd.CommandType = CommandType.Text
+        'cmd.ExecuteNonQuery()
+        'MessageBox.Show("Registro borrado")
+        'btnNuevo_Click(Nothing, Nothing)
+        'SQL = "SELECT * from productos order by nombre"
+        'dgvProductos.DataSource = cargar_grid(SQL, ConexionDB)
     End Sub
     Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
         Me.Close()
@@ -206,6 +203,25 @@ Public Class Productos
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
         GuardarProducto()
+    End Sub
+
+    Private Sub txtCompra_TextChanged(sender As Object, e As EventArgs) Handles txtCompra.TextChanged
+        CalcularPrecioVenta()
+    End Sub
+
+    Private Sub txtGanancia_TextChanged(sender As Object, e As EventArgs) Handles txtGanancia.TextChanged
+        CalcularPrecioVenta()
+    End Sub
+
+    Private Sub CalcularPrecioVenta()
+        If IsNumeric(txtCompra.Text) AndAlso IsNumeric(txtGanancia.Text) Then
+            Dim precioCompra As Decimal = Convert.ToDecimal(txtCompra.Text)
+            Dim gananciaPorcentaje As Decimal = Convert.ToDecimal(txtGanancia.Text) / 100
+            Dim precioVenta As Decimal = precioCompra * (1 + gananciaPorcentaje)
+            txtPrecioVenta.Text = precioVenta.ToString()
+        Else
+            'MessageBox.Show("Por favor, ingresa valores numéricos válidos para el precio de compra y la ganancia.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
     End Sub
 
 End Class
