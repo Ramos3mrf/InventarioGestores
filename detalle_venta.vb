@@ -1,239 +1,249 @@
-﻿Imports System.Data.Common
+﻿Imports System.Data.SqlClient
 Imports MySql.Data.MySqlClient
+
 Public Class detalle_venta
-
-
-    Private dbConnection As New ConexionBasedeDatos()
     Private ConexionDB As MySqlConnection
-    Private Sub dgvDetalleVenta_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvDetalleVenta.CellContentClick
-
-    End Sub
+    Private preciosProductos As New Dictionary(Of Integer, Decimal)
+    Private clientesDictionary As New Dictionary(Of Integer, String)
+    Private idDetalle As Integer = 1
 
     Private Sub detalle_venta_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ConexionDB = Module1.ConexionDB()
-
-        ' Cargar el DataTable con los datos
-        Dim SQL As String = "SELECT dv.cantidad, nombre as 'Nombre del producto', precio_venta as 'Precio' from productos p join detalle_ventas dv using(id_producto)"
-        Dim detalleVentaTable As DataTable = cargar_grid(SQL, ConexionDB)
-
-        ' Agregar columnas personalizadas al DataTable si no existen
-        If Not detalleVentaTable.Columns.Contains("id_producto") Then
-            detalleVentaTable.Columns.Add("id_producto", GetType(String))
-        End If
-        If Not detalleVentaTable.Columns.Contains("subtotal") Then
-            detalleVentaTable.Columns.Add("subtotal", GetType(Decimal))
-        End If
-        If Not detalleVentaTable.Columns.Contains("id_detalle") Then
-            detalleVentaTable.Columns.Add("id_detalle", GetType(Integer))
-        End If
-
-
-        ' Configurar el DataGridView para usar el DataTable modificado
-        dgvDetalleVenta.DataSource = detalleVentaTable
-
-        ' Configurar el ancho de las columnas
-        dgvDetalleVenta.Columns("Nombre del producto").Width = 200
-        dgvDetalleVenta.Columns("cantidad").Width = 70
-        dgvDetalleVenta.Columns("id_detalle").Width = 80
-
-        ' Cargar el DataGridView de Productos Cliente (izquierdo)
-        SQL = "SELECT id_producto, nombre, precio_venta, stock from productos"
-        dgvProdStock.DataSource = cargar_grid(SQL, ConexionDB)
-    End Sub
-    Private Sub LimpiarFormulario()
-        txtIDventa.Clear()
-        txtTotal.Clear()
-    End Sub
-
-    Private Sub dgvProdStock_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvProdStock.CellContentClick
-        If e.RowIndex >= 0 Then
-            Dim row As DataGridViewRow = dgvProdStock.Rows(e.RowIndex)
-
-            txtIDprod.Text = row.Cells("id_producto").Value.ToString()
-            txtPrecioU.Text = row.Cells("precio_venta").Value.ToString()
-            txtCantidad.Text = ""
-            txtSubTotal.Text = ""
-        End If
-
+        LlenarComboBoxProductos()
+        LlenarComboBoxClientes()
     End Sub
 
     Private Sub txtCantidad_TextChanged(sender As Object, e As EventArgs) Handles txtCantidad.TextChanged
         Dim cantidad As Integer
         Dim precioUnitario As Decimal
 
-        If Integer.TryParse(txtCantidad.Text, cantidad) AndAlso Decimal.TryParse(txtPrecioU.Text, precioUnitario) Then
-            txtSubTotal.Text = (cantidad * precioUnitario).ToString("F2")
+        If Integer.TryParse(txtCantidad.Text, cantidad) AndAlso cantidad > 0 Then
+            If Decimal.TryParse(txtPrecioU.Text, Globalization.NumberStyles.Currency, Globalization.CultureInfo.InvariantCulture, precioUnitario) Then
+                txtSubTotal.Text = (cantidad * precioUnitario).ToString()
+            Else
+                txtSubTotal.Text = ""
+            End If
         Else
             txtSubTotal.Text = ""
         End If
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
-        If txtIDprod.Text <> "" AndAlso txtCantidad.Text <> "" AndAlso txtSubTotal.Text <> "" Then
-            ' Obtener el DataTable desde el DataGridView
-            Dim detalleVentaTable As DataTable = CType(dgvDetalleVenta.DataSource, DataTable)
-
-            ' Generar ID de detalle (basado en la cantidad de filas + 1)
-            Dim nuevoIdDetalle As Integer = detalleVentaTable.Rows.Count + 1
-
-            ' Crear una nueva fila en el DataTable
-            Dim nuevaFila As DataRow = detalleVentaTable.NewRow()
-
-            ' Asignar valores a las columnas del DataTable y las columnas personalizadas
-            nuevaFila("id_detalle") = nuevoIdDetalle
-            nuevaFila("cantidad") = txtCantidad.Text
-            nuevaFila("Nombre del producto") = dgvProdStock.CurrentRow.Cells("nombre").Value.ToString()
-            nuevaFila("Precio") = txtPrecioU.Text
-
-            nuevaFila("id_producto") = txtIDprod.Text
-            nuevaFila("subtotal") = txtSubTotal.Text
-
-            ' Agregar la fila al DataTable
-            detalleVentaTable.Rows.Add(nuevaFila)
-
-            ' Actualizar el total
-            Dim subtotal As Decimal = Decimal.Parse(txtSubTotal.Text)
-            Dim totalActual As Decimal
-            Decimal.TryParse(txtTotal.Text, totalActual)
-            txtTotal.Text = (totalActual + subtotal).ToString("F2")
-
-            ' Limpiar los campos de entrada
-            txtIDprod.Clear()
-            txtPrecioU.Clear()
-            txtCantidad.Clear()
-            txtSubTotal.Clear()
-        Else
-            MessageBox.Show("Por favor, complete todos los campos para agregar el producto.")
-        End If
-    End Sub
-
-    Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
-        ' Verificar que se haya ingresado un cliente y un total válido
-        If txtTotal.Text = "" OrElse txtID_Cliente.Text = "" Then
-            MessageBox.Show("Por favor, complete los campos de venta.")
+        If cmbProductos.SelectedItem Is Nothing OrElse String.IsNullOrWhiteSpace(txtCantidad.Text) Then
+            MessageBox.Show("Por favor, seleccione un producto e ingrese una cantidad válida.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
 
-        ' Guardar la venta en la tabla Ventas y obtener el ID generado
-        Dim idVenta As Integer = GuardarVenta(txtID_Cliente.Text, txtTotal.Text)
+        ' Obtén el objeto seleccionado en lugar de una cadena
+        Dim productoSeleccionado As Object = cmbProductos.SelectedItem
+        Dim idProducto As Integer = CInt(productoSeleccionado.GetType().GetProperty("Id").GetValue(productoSeleccionado))
+        Dim nombreProducto As String = CStr(productoSeleccionado.GetType().GetProperty("Nombre").GetValue(productoSeleccionado))
+        Dim cantidad As Integer = Integer.Parse(txtCantidad.Text)
+        Dim precioUnitario As Decimal = preciosProductos(idProducto)
 
-        ' Guardar cada producto en el detalle de la venta
-        For Each row As DataGridViewRow In dgvDetalleVenta.Rows
-            If Not row.IsNewRow Then
-                Dim idDetalle As Integer = Integer.Parse(row.Cells("id_detalle").Value.ToString())
-                Dim idProducto As Integer = Integer.Parse(row.Cells("id_producto").Value.ToString())
-                Dim cantidad As Integer = Integer.Parse(row.Cells("cantidad").Value.ToString())
-                Dim precioUnitario As Decimal = Decimal.Parse(row.Cells("Precio").Value.ToString())
-                GuardarDetalleVenta(idDetalle, idVenta, idProducto, cantidad, precioUnitario)
+        Dim stockDisponible As Integer = CInt(productoSeleccionado.GetType().GetProperty("Stock").GetValue(productoSeleccionado))
+
+        If cantidad > stockDisponible Then
+            MessageBox.Show("Stock insuficiente para el producto seleccionado.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        Dim subtotal As Decimal = cantidad * precioUnitario
+        dgvDetalleVenta.Rows.Add(idDetalle, idProducto, nombreProducto, cantidad, precioUnitario, subtotal)
+        idDetalle += 1
+        ActualizarTotal()
+        txtCantidad.Clear()
+    End Sub
+
+
+    Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+        Try
+            If Module1.ConexionDB.State = ConnectionState.Closed Then
+                Module1.ConexionDB.Open()
             End If
-        Next
+            ' Verifica si hay productos en el DataGridView antes de continuar
+            If dgvDetalleVenta.Rows.Count = 0 Then
+                MessageBox.Show("Agrega al menos un producto a la lista.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
+            Dim idVenta As Integer = GuardarVenta(ObtenerIdClienteSeleccionado(), txtTotal.Text.Replace("C$", "").Trim())
 
-        MessageBox.Show("Venta guardada exitosamente.")
-        LimpiarFormulario()
+            For Each row As DataGridViewRow In dgvDetalleVenta.Rows
+
+                If row.Cells("id_Producto").Value IsNot Nothing AndAlso
+                   row.Cells("cantidad").Value IsNot Nothing AndAlso
+                   row.Cells("precioU").Value IsNot Nothing Then
+
+
+                    Dim idProducto As Integer = Convert.ToInt32(row.Cells("id_Producto").Value)
+                    Dim cantidad As Integer = Convert.ToInt32(row.Cells("cantidad").Value)
+                    Dim precioUnitario As Decimal = Convert.ToDecimal(row.Cells("precioU").Value)
+
+                    Dim queryDetalle As String = "INSERT INTO Detalle_Ventas (id_venta, id_producto, cantidad, precio_unitario) VALUES (@id_venta, @id_producto, @cantidad, @precio_unitario)"
+                    Using comandoDetalle As New MySqlCommand(queryDetalle, ConexionDB)
+                        comandoDetalle.Parameters.AddWithValue("@id_venta", idVenta)
+                        comandoDetalle.Parameters.AddWithValue("@id_producto", idProducto)
+                        comandoDetalle.Parameters.AddWithValue("@cantidad", cantidad)
+                        comandoDetalle.Parameters.AddWithValue("@precio_unitario", precioUnitario)
+                        MessageBox.Show("ID Venta: " & idVenta & " - ID Producto: " & idProducto & " - Cantidad: " & cantidad & " - Precio Unitario: " & precioUnitario)
+                        comandoDetalle.ExecuteNonQuery()
+                    End Using
+
+                    Dim queryActualizarStock As String = "UPDATE productos SET stock = stock - @cantidad WHERE id_producto = @id_producto"
+                    Using comandoActualizarStock As New MySqlCommand(queryActualizarStock, ConexionDB)
+                        comandoActualizarStock.Parameters.AddWithValue("@cantidad", cantidad)
+                        comandoActualizarStock.Parameters.AddWithValue("@id_producto", idProducto)
+                        comandoActualizarStock.ExecuteNonQuery()
+                    End Using
+                End If
+            Next
+
+            MessageBox.Show("Venta guardada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            dgvDetalleVenta.Rows.Clear()
+            txtTotal.Clear()
+            cmbClientes.Items.Clear()
+            cmbProductos.Items.Clear()
+
+        Catch ex As Exception
+            MessageBox.Show("Error al guardar venta: " & ex.Message)
+        Finally
+            If Module1.ConexionDB.State = ConnectionState.Open Then
+                Module1.ConexionDB.Close()
+            End If
+        End Try
     End Sub
 
     Private Function GuardarVenta(idCliente As String, total As String) As Integer
-        ' Prepara la fecha de venta en formato adecuado para la base de datos
-        Dim fechaVenta As String = DateTime.Now.ToString("yyyy-MM-dd")
+        Dim queryVenta As String = "INSERT INTO Ventas (fecha_venta, id_cliente, total) VALUES (@fecha_venta, @id_cliente, @total)"
+        If ConexionDB.State = ConnectionState.Closed Then
+            ConexionDB.Open()
+        End If
 
-        ' Construye la consulta INSERT con parámetros para evitar la inyección SQL
-        Dim sql = "INSERT INTO Ventas (fecha_venta, id_cliente, total) VALUES (@fechaVenta, @idCliente, @total)"
-
-        Using connection = Module1.ConexionDB ' Abrir la conexión a la base de datos
-            connection.Open()  ' Abrir la conexión
-
-            Using command As New MySqlCommand(sql, connection) ' Crear el comando
-                ' Agregar parámetros con valores seguros
-                command.Parameters.AddWithValue("@fechaVenta", fechaVenta)
-                command.Parameters.AddWithValue("@idCliente", idCliente)
-                command.Parameters.AddWithValue("@total", total)
-
-                ' Ejecutar la consulta y obtener el ID generado
-                Dim idVentaGenerado As Integer = command.ExecuteScalar() ' Obtener el ID de la venta insertada
-
-                If idVentaGenerado > 0 Then ' Verifica si se insertó correctamente
-                    Return idVentaGenerado ' Retorna el ID generado
-                Else
-                    MessageBox.Show("Error al guardar la venta.")
-                    Return -1 ' Indica un error
-                End If
-            End Using
+        Using comandoVenta As New MySqlCommand(queryVenta, ConexionDB)
+            comandoVenta.Parameters.AddWithValue("@fecha_venta", DateTime.Now)
+            comandoVenta.Parameters.AddWithValue("@id_cliente", idCliente)
+            comandoVenta.Parameters.AddWithValue("@total", total)
+            comandoVenta.ExecuteNonQuery()
+            Return Convert.ToInt32(comandoVenta.LastInsertedId)
         End Using
     End Function
 
-    Private Sub GuardarDetalleVenta(idDetalle As Integer, idVenta As Integer, idProducto As Integer, cantidad As Integer, precioUnitario As Decimal)
-        Dim SQL As String = "INSERT INTO detalle_Ventas (id_detalle, id_venta, id_producto, cantidad, precio_unitario) VALUES (null, null, @idProducto, @cantidad, @precioUnitario)"
-
-        Using cmd As New MySqlCommand(SQL, Module1.ConexionDB())
-            cmd.Parameters.AddWithValue("@id_detalle", idDetalle)
-            cmd.Parameters.AddWithValue("@idVenta", idVenta)
-            cmd.Parameters.AddWithValue("@idProducto", idProducto)
-            cmd.Parameters.AddWithValue("@cantidad", cantidad)
-            cmd.Parameters.AddWithValue("@precioUnitario", precioUnitario)
-
-            Try
-                ' Verificar si la conexión ya está abierta
-                If ConexionDB.State = ConnectionState.Closed Then
-                    ConexionDB.Open()
-                End If
-
-                cmd.ExecuteNonQuery()
-            Catch ex As Exception
-                MessageBox.Show("Error al guardar el detalle de la venta: " & ex.Message)
-            Finally
-                ' Verificar si la conexión está abierta antes de cerrarla
-                If ConexionDB.State = ConnectionState.Open Then
-                    ConexionDB.Close()
-                End If
-            End Try
-        End Using
-    End Sub
-
-    Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
-        Me.Close()
-    End Sub
-
-    Private Sub btnBorrar_Click(sender As Object, e As EventArgs) Handles btnBorrar.Click
-        ' Verifica que haya una fila seleccionada
-        If dgvDetalleVenta.SelectedRows.Count > 0 Then
-            ' Confirma si desea borrar el registro seleccionado
-            Dim result As DialogResult = MessageBox.Show("¿Está seguro de que desea eliminar el producto seleccionado?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-
-            If result = DialogResult.Yes Then
-                ' Obtiene la fila seleccionada y la elimina
-                dgvDetalleVenta.Rows.Remove(dgvDetalleVenta.SelectedRows(0))
-                ' Actualiza el total después de borrar un producto
-                ActualizarTotal()
+    Private Sub ActualizarTotal()
+        Dim total As Decimal = 0
+        For Each row As DataGridViewRow In dgvDetalleVenta.Rows
+            If row.Cells("subtotal").Value IsNot Nothing Then
+                total += Convert.ToDecimal(row.Cells("subtotal").Value)
             End If
-        Else
-            MessageBox.Show("Por favor, seleccione un producto para borrar.", "Eliminar producto", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        Next
+        txtTotal.Text = total.ToString()
+    End Sub
+
+    Private Sub LlenarComboBoxProductos()
+        Dim SQL As String = "select id_producto, nombre, precio_venta, stock from productos"
+
+        Try
+            If Module1.ConexionDB.State = ConnectionState.Closed Then
+                Module1.ConexionDB.Open()
+            End If
+
+            Using cmd As New MySqlCommand(SQL, Module1.ConexionDB)
+                Using reader As MySqlDataReader = cmd.ExecuteReader()
+                    cmbProductos.Items.Clear()
+                    preciosProductos.Clear()
+
+                    While reader.Read()
+                        Dim idProducto As Integer = reader("id_producto")
+                        Dim nombreProducto As String = reader("nombre").ToString()
+                        Dim precioProducto As Decimal = reader("precio_venta")
+                        Dim stockPro As Integer = reader("stock")
+
+                        ' Creamos un objeto anónimo o un objeto personalizado con las propiedades necesarias
+                        Dim producto As New With {
+                        .Id = idProducto,
+                        .Nombre = nombreProducto,
+                        .Precio = precioProducto,
+                        .Stock = stockPro
+                    }
+
+                        ' Añadimos el objeto al ComboBox
+                        cmbProductos.Items.Add(producto)
+
+                        ' Guardamos el precio en el diccionario
+                        preciosProductos(idProducto) = precioProducto
+                    End While
+                End Using
+            End Using
+
+            ' Establecemos el DisplayMember para que solo se muestre el nombre del producto
+            cmbProductos.DisplayMember = "Nombre"
+        Catch ex As Exception
+            MessageBox.Show("Error al cargar productos: " & ex.Message)
+        Finally
+            If Module1.ConexionDB.State = ConnectionState.Open Then
+                Module1.ConexionDB.Close()
+            End If
+        End Try
+    End Sub
+
+    Private Sub LlenarComboBoxClientes()
+        Dim SQL As String = "select id_Cliente, nombre from clientes"
+        Try
+            If ConexionDB.State = ConnectionState.Closed Then
+                ConexionDB.Open()
+            End If
+
+            Using consulta As New MySqlCommand(SQL, ConexionDB)
+                Using reader As MySqlDataReader = consulta.ExecuteReader()
+                    clientesDictionary.Clear()
+                    cmbClientes.Items.Clear()
+                    While reader.Read()
+                        Dim idCliente As Integer = reader.GetInt32(0)
+                        Dim nombreCliente As String = reader.GetString(1)
+                        clientesDictionary.Add(idCliente, nombreCliente)
+                        cmbClientes.Items.Add(nombreCliente)
+                    End While
+                End Using
+            End Using
+
+            If cmbClientes.Items.Count > 0 Then
+                cmbClientes.SelectedIndex = 0
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error al cargar Cliente: " & ex.Message)
+        Finally
+            If ConexionDB.State = ConnectionState.Open Then
+                ConexionDB.Close()
+            End If
+        End Try
+    End Sub
+
+    Private Sub cmbProductos_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbProductos.SelectedIndexChanged
+        If cmbProductos.SelectedItem IsNot Nothing Then
+            Dim productoSeleccionado As Object = cmbProductos.SelectedItem
+            Dim idProducto As Integer = CInt(productoSeleccionado.GetType().GetProperty("Id").GetValue(productoSeleccionado))
+
+            If preciosProductos.ContainsKey(idProducto) Then
+                txtPrecioU.Text = preciosProductos(idProducto).ToString()
+                txtStock.Text = CStr(productoSeleccionado.GetType().GetProperty("Stock").GetValue(productoSeleccionado))
+            End If
         End If
     End Sub
 
-    Private Sub ActualizarTotal()
-        Dim total As Decimal = 0
+    Private Function ObtenerIdClienteSeleccionado() As Integer
+        Dim nombreClienteSeleccionado As String = cmbClientes.SelectedItem.ToString()
 
-        ' Recorremos cada fila del DataGridView
-        For Each fila As DataGridViewRow In dgvDetalleVenta.Rows
-            ' Si la fila no es una nueva fila (es decir, contiene datos)
-            If Not fila.IsNewRow Then
-                ' Intentamos convertir el valor de la columna "subtotal" a decimal
-                If Decimal.TryParse(fila.Cells("subtotal").Value.ToString(), total) Then
-                    ' Si la conversión es exitosa, sumamos el valor al total
-                End If
-            End If
-        Next
+        ' Usamos el diccionario para obtener el ID correspondiente al nombre seleccionado
+        Dim idClienteSeleccionado As Integer = clientesDictionary.FirstOrDefault(Function(c) c.Value = nombreClienteSeleccionado).Key
 
-        ' Mostramos el total formateado en el TextBox
-        txtTotal.Text = total.ToString("C$") ' Formato de moneda según la configuración regional
+        Return idClienteSeleccionado
+    End Function
+
+    Private Sub Salir_Click(sender As Object, e As EventArgs) Handles Salir.Click
+        Me.Close()
     End Sub
 
-    Private Sub btnNuevo_Click(sender As Object, e As EventArgs) Handles btnNuevo.Click
-        LimpiarFormulario()
-        ' Asignar una fuente de datos vacía
-        dgvDetalleVenta.DataSource = Nothing
-
-        ' Opcional: Deshabilitar la edición del DataGridView
-        dgvDetalleVenta.ReadOnly = True
+    Private Sub bntNuevoCliente_Click(sender As Object, e As EventArgs) Handles bntNuevoCliente.Click
+        Dim formClientes As New Clientes()
+        formClientes.Show()
     End Sub
 End Class

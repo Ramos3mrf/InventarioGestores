@@ -11,7 +11,7 @@ Public Class buscarFechaCompra
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
         'cargar el datagridview con los datos del dataset
         Dim SQL As String
-        SQL = "SELECT * FROM compras a where fecha_ing between '" & dtpInicial.Text & "' and '" & dtpFinal.Text & "'"
+        SQL = "SELECT * FROM compras a where fecha_compra between '" & dtpInicial.Text & "' and '" & dtpFinal.Text & "'"
         dgvComprasVer.DataSource = cargar_grid(SQL, ConexionDB)
     End Sub
 

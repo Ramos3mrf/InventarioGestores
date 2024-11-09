@@ -2,6 +2,7 @@
 Imports MySql.Data.MySqlClient
 Imports Microsoft.Office.Interop
 
+
 Module Module1
     Public GUsername, Grol As String
     Private dbConnection As New ConexionBasedeDatos()
@@ -29,7 +30,7 @@ Module Module1
         Dim exhoja As Excel.Worksheet
         Try
             exlibro = exapp.Workbooks.Add
-            exhoja = exlibro.Worksheets.Add()             'Numero de Filas y columnas
+            exhoja = exlibro.Worksheets.Add() 'Numero de Filas y columnas
             Dim ncol As Integer = Datagridview1.ColumnCount
 
             Dim nrow As Integer = Datagridview1.RowCount

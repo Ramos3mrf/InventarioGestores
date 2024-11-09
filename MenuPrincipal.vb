@@ -27,24 +27,6 @@ Public Class MenuPrincipal
         Me.Hide()
     End Sub
 
-    'Public Sub AbrirHijo(proveedoresFormulario As Form)
-    '    ' Cerrar cualquier formulario hijo que ya esté abierto en el panel
-    '    For Each form As Form In Me.MdiChildren
-    '        form.Close()
-    '    Next
-
-    '    ' Configurar el formulario hijo
-    '    proveedoresFormulario.TopLevel = False ' Indica que el formulario no es una ventana superior
-    '    proveedoresFormulario.FormBorderStyle = FormBorderStyle.None ' Quitar bordes
-    '    proveedoresFormulario.Dock = DockStyle.Fill ' Llenar todo el panel
-
-    '    ' Agregar el formulario hijo al panel contenedor y mostrarlo
-    '    PanelContenedor.Controls.Add(proveedoresFormulario)
-    '    PanelContenedor.Tag = proveedoresFormulario
-    '    proveedoresFormulario.MdiParent = Me ' Establecer el formulario principal como contenedor MDI
-    '    proveedoresFormulario.Show()
-    'End Sub
-
 
     Private Sub tsmCatPro_Click(sender As Object, e As EventArgs) Handles tsmCatPro.Click
         Dim proveedoresFormulario As New Proveedores()

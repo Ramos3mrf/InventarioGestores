@@ -33,10 +33,10 @@ Partial Class buscarFechaVenta
         Label1 = New Label()
         dgvReporteVentas = New DataGridView()
         Label2 = New Label()
-        Guna2Button1 = New Guna.UI2.WinForms.Guna2Button()
-        Guna2Button2 = New Guna.UI2.WinForms.Guna2Button()
         dtpInicio = New Guna.UI2.WinForms.Guna2DateTimePicker()
         dtpFinal = New Guna.UI2.WinForms.Guna2DateTimePicker()
+        btnBuscar = New Guna.UI2.WinForms.Guna2Button()
+        btnExportar = New Guna.UI2.WinForms.Guna2Button()
         CType(dgvReporteVentas, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
@@ -70,50 +70,6 @@ Partial Class buscarFechaVenta
         Label2.TabIndex = 5
         Label2.Text = "Fecha Final:"
         ' 
-        ' Guna2Button1
-        ' 
-        Guna2Button1.BackColor = Color.Transparent
-        Guna2Button1.BorderColor = Color.Navy
-        Guna2Button1.BorderRadius = 10
-        Guna2Button1.BorderThickness = 1
-        Guna2Button1.CustomizableEdges = CustomizableEdges1
-        Guna2Button1.DisabledState.BorderColor = Color.DarkGray
-        Guna2Button1.DisabledState.CustomBorderColor = Color.DarkGray
-        Guna2Button1.DisabledState.FillColor = Color.FromArgb(CByte(169), CByte(169), CByte(169))
-        Guna2Button1.DisabledState.ForeColor = Color.FromArgb(CByte(141), CByte(141), CByte(141))
-        Guna2Button1.FillColor = Color.White
-        Guna2Button1.Font = New Font("Segoe UI", 9F)
-        Guna2Button1.ForeColor = Color.Navy
-        Guna2Button1.Image = My.Resources.Resources.buscar
-        Guna2Button1.Location = New Point(281, 101)
-        Guna2Button1.Name = "Guna2Button1"
-        Guna2Button1.ShadowDecoration.CustomizableEdges = CustomizableEdges2
-        Guna2Button1.Size = New Size(129, 38)
-        Guna2Button1.TabIndex = 9
-        Guna2Button1.Text = "Buscar"
-        ' 
-        ' Guna2Button2
-        ' 
-        Guna2Button2.BackColor = Color.Transparent
-        Guna2Button2.BorderColor = Color.Green
-        Guna2Button2.BorderRadius = 10
-        Guna2Button2.BorderThickness = 1
-        Guna2Button2.CustomizableEdges = CustomizableEdges3
-        Guna2Button2.DisabledState.BorderColor = Color.DarkGray
-        Guna2Button2.DisabledState.CustomBorderColor = Color.DarkGray
-        Guna2Button2.DisabledState.FillColor = Color.FromArgb(CByte(169), CByte(169), CByte(169))
-        Guna2Button2.DisabledState.ForeColor = Color.FromArgb(CByte(141), CByte(141), CByte(141))
-        Guna2Button2.FillColor = Color.White
-        Guna2Button2.Font = New Font("Segoe UI", 9F)
-        Guna2Button2.ForeColor = Color.Green
-        Guna2Button2.Image = My.Resources.Resources.xls
-        Guna2Button2.Location = New Point(161, 401)
-        Guna2Button2.Name = "Guna2Button2"
-        Guna2Button2.ShadowDecoration.CustomizableEdges = CustomizableEdges4
-        Guna2Button2.Size = New Size(100, 37)
-        Guna2Button2.TabIndex = 8
-        Guna2Button2.Text = "Exportar"
-        ' 
         ' dtpInicio
         ' 
         dtpInicio.BackColor = Color.FromArgb(CByte(224), CByte(224), CByte(224))
@@ -121,7 +77,7 @@ Partial Class buscarFechaVenta
         dtpInicio.BorderRadius = 7
         dtpInicio.BorderThickness = 1
         dtpInicio.Checked = True
-        dtpInicio.CustomizableEdges = CustomizableEdges5
+        dtpInicio.CustomizableEdges = CustomizableEdges1
         dtpInicio.FillColor = Color.White
         dtpInicio.Font = New Font("Segoe UI", 9F)
         dtpInicio.ForeColor = Color.Navy
@@ -130,7 +86,7 @@ Partial Class buscarFechaVenta
         dtpInicio.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         dtpInicio.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
         dtpInicio.Name = "dtpInicio"
-        dtpInicio.ShadowDecoration.CustomizableEdges = CustomizableEdges6
+        dtpInicio.ShadowDecoration.CustomizableEdges = CustomizableEdges2
         dtpInicio.Size = New Size(227, 41)
         dtpInicio.TabIndex = 10
         dtpInicio.Value = New Date(2024, 11, 2, 23, 29, 12, 437)
@@ -142,7 +98,7 @@ Partial Class buscarFechaVenta
         dtpFinal.BorderRadius = 7
         dtpFinal.BorderThickness = 1
         dtpFinal.Checked = True
-        dtpFinal.CustomizableEdges = CustomizableEdges7
+        dtpFinal.CustomizableEdges = CustomizableEdges3
         dtpFinal.FillColor = Color.White
         dtpFinal.Font = New Font("Segoe UI", 9F)
         dtpFinal.ForeColor = Color.Navy
@@ -151,10 +107,56 @@ Partial Class buscarFechaVenta
         dtpFinal.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         dtpFinal.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
         dtpFinal.Name = "dtpFinal"
-        dtpFinal.ShadowDecoration.CustomizableEdges = CustomizableEdges8
+        dtpFinal.ShadowDecoration.CustomizableEdges = CustomizableEdges4
         dtpFinal.Size = New Size(227, 38)
         dtpFinal.TabIndex = 11
         dtpFinal.Value = New Date(2024, 11, 2, 23, 29, 12, 437)
+        ' 
+        ' btnBuscar
+        ' 
+        btnBuscar.BackColor = Color.Transparent
+        btnBuscar.BorderColor = Color.Navy
+        btnBuscar.BorderRadius = 10
+        btnBuscar.BorderThickness = 1
+        btnBuscar.CustomizableEdges = CustomizableEdges5
+        btnBuscar.DisabledState.BorderColor = Color.DarkGray
+        btnBuscar.DisabledState.CustomBorderColor = Color.DarkGray
+        btnBuscar.DisabledState.FillColor = Color.FromArgb(CByte(169), CByte(169), CByte(169))
+        btnBuscar.DisabledState.ForeColor = Color.FromArgb(CByte(141), CByte(141), CByte(141))
+        btnBuscar.FillColor = Color.White
+        btnBuscar.Font = New Font("Segoe UI", 9F)
+        btnBuscar.ForeColor = Color.Navy
+        btnBuscar.Image = My.Resources.Resources.buscar
+        btnBuscar.Location = New Point(304, 101)
+        btnBuscar.Name = "btnBuscar"
+        btnBuscar.ShadowDecoration.Color = Color.FromArgb(CByte(0), CByte(0), CByte(64))
+        btnBuscar.ShadowDecoration.CustomizableEdges = CustomizableEdges6
+        btnBuscar.ShadowDecoration.Shadow = New Padding(5, 12, 5, 5)
+        btnBuscar.Size = New Size(106, 38)
+        btnBuscar.TabIndex = 13
+        btnBuscar.Text = "Buscar"
+        ' 
+        ' btnExportar
+        ' 
+        btnExportar.BackColor = Color.Transparent
+        btnExportar.BorderColor = Color.Green
+        btnExportar.BorderRadius = 10
+        btnExportar.BorderThickness = 1
+        btnExportar.CustomizableEdges = CustomizableEdges7
+        btnExportar.DisabledState.BorderColor = Color.DarkGray
+        btnExportar.DisabledState.CustomBorderColor = Color.DarkGray
+        btnExportar.DisabledState.FillColor = Color.FromArgb(CByte(169), CByte(169), CByte(169))
+        btnExportar.DisabledState.ForeColor = Color.FromArgb(CByte(141), CByte(141), CByte(141))
+        btnExportar.FillColor = Color.White
+        btnExportar.Font = New Font("Segoe UI", 9F)
+        btnExportar.ForeColor = Color.Green
+        btnExportar.Image = My.Resources.Resources.xls
+        btnExportar.Location = New Point(162, 397)
+        btnExportar.Name = "btnExportar"
+        btnExportar.ShadowDecoration.CustomizableEdges = CustomizableEdges8
+        btnExportar.Size = New Size(100, 41)
+        btnExportar.TabIndex = 12
+        btnExportar.Text = "Exportar"
         ' 
         ' buscarFechaVenta
         ' 
@@ -162,10 +164,10 @@ Partial Class buscarFechaVenta
         AutoScaleMode = AutoScaleMode.Font
         BackgroundImageLayout = ImageLayout.Zoom
         ClientSize = New Size(422, 450)
+        Controls.Add(btnBuscar)
+        Controls.Add(btnExportar)
         Controls.Add(dtpFinal)
         Controls.Add(dtpInicio)
-        Controls.Add(Guna2Button1)
-        Controls.Add(Guna2Button2)
         Controls.Add(Label2)
         Controls.Add(dgvReporteVentas)
         Controls.Add(Label1)
@@ -178,13 +180,12 @@ Partial Class buscarFechaVenta
 
     Friend WithEvents Label1 As Label
     Friend WithEvents dgvReporteVentas As DataGridView
-    Friend WithEvents btnBuscar As Button
     Friend WithEvents DateTimePicker1 As DateTimePicker
-    Friend WithEvents btnExportar As Button
     Friend WithEvents DateTimePicker2 As DateTimePicker
     Friend WithEvents Label2 As Label
-    Friend WithEvents Guna2Button1 As Guna.UI2.WinForms.Guna2Button
-    Friend WithEvents Guna2Button2 As Guna.UI2.WinForms.Guna2Button
+
     Friend WithEvents dtpInicio As Guna.UI2.WinForms.Guna2DateTimePicker
     Friend WithEvents dtpFinal As Guna.UI2.WinForms.Guna2DateTimePicker
+    Friend WithEvents btnBuscar As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents btnExportar As Guna.UI2.WinForms.Guna2Button
 End Class
